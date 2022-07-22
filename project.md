@@ -4,27 +4,25 @@ title: Projects
 url: project
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+Here is a subset of interesting projects I have done. Code for most of these and more can be found on my [github](github.com/VedangAsgaonkar).
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+## Data Science
+* Impact of emotional congruence on advertisement
+* Clustering Algorithms in C++
 
-There are currently two themes built on Poole:
+## Machine Learning
+* Speech emotion recognition using tone and words
+* Adaptive powerpropogation for sparse networks
+* IITB SoC in Quantum Machine Learning
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+## Theory
+* Evolutionary game theory with DAG mutation
+* SAT solving for rush hour
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+## Systems
+* Peer2Peer file transfer network
+* 16-bit RISC CPU
 
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](https://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Atom](https://atom.io)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+## Development
+* Ambient light raytracer
+* Object oriented online learning environment
