@@ -4,7 +4,7 @@ title: Projects
 url: project
 ---
 
-Here is a subset of interesting projects I have done. Code for most of these and more can be found on my [github](github.com/VedangAsgaonkar).
+Here is a subset of interesting projects I have done. Code for most of these and more can be found on my [github](https://github.com/VedangAsgaonkar).
 
 ## Data Science
 * Impact of emotional congruence on advertisement
