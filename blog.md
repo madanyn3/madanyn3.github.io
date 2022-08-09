@@ -4,6 +4,8 @@ title: Blogs
 url: blogs
 ---
 
+This page is about some of my thoughts and ideas. It is greatly influenced by my experiences, the conversations I have with people and a few insightful books. By its very nature, this blog is an expression of opinion, so it is likely to be biased by my world view. Hit me up if you wish to share your thoughts regarding these blog posts.
+
 ## Faith and Society
 #### 9 Aug '22
 We live in a time where we hear about communal and religious violence every day. At the same time the number of people who call themselves atheists and campaign against religion is on the rise. In such a time, I will be making a stand, in defence of religion, not in defence of communal violence, mind you, in favor of the idea of a religion.
