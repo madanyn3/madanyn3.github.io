@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Projects
-url: project
+title: Blogs
+url: blogs
 ---
 
 # My Blog
