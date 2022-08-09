@@ -4,7 +4,6 @@ title: Blogs
 url: blogs
 ---
 
-# My Blog
 ## Faith and Society
 We live in a time where we hear about communal and religious violence every day. At the same time the number of people who call themselves atheists and campaign against religion is on the rise. In such a time, I will be making a stand, in defence of religion, not in defence of communal violence, mind you, in favor of the idea of a religion.
 
