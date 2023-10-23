@@ -7,7 +7,7 @@ url: hobbies
 Here is what I would like the world to believe I do in my free time (which may or may not exist, open the box to figure out 🐱📦).
 
 ## Music 🎧
-I generally like soulful and lofi songs, typically with a good amount of guitar and piano. My playlists would only partially agree.
+I generally like soulful and lofi songs, typically with a good amount of guitar and piano. My playlists would only partially agree. They know that [I put my armor on to show you how strong I am](https://music.youtube.com/watch?v=cfhwSpSDA9c).
 
 ## TV shows and movies 🎦
 I prefer to watch light TV shows, generally sitcoms. My taste in movies is a total contrast, I like movies with a strong story line, typically with some amount of drama and a twist. 
