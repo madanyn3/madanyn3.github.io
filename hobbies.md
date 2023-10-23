@@ -4,10 +4,10 @@ title: Random Stuff
 url: hobbies
 ---
 
-For the most part this site is made from an academic POV, but here are some of my other likings.
+Here is what I would like the world to believe I do in my free time (which may or may not exist, open the box to figure out 🐱📦).
 
 ## Music 🎧
-I generally like soulful and lofi songs, typically with a good amount of musical instruments. The occassional metal song is also welcome. Some of my favorites are Waqt Ki Batein by Dream Note and Vienna by Billy Joel.
+I generally like soulful and lofi songs, typically with a good amount of guitar and piano. My playlists would only partially agree.
 
 ## TV shows and movies 🎦
 I prefer to watch light TV shows, generally sitcoms. My taste in movies is a total contrast, I like movies with a strong story line, typically with some amount of drama and a twist. 
