@@ -21,14 +21,14 @@ We deal with a feature acquisition task for classification. Primarily, we are gi
 * We provide theoretical backing and experimental verification to our greedy algorithm
 
 ## Problem Setup
-We use $$x \in \mathbb{R}^n$$ to denote a feature vector and $$y$$ to denote the classification label. We denote $$\mathcal{I} = [n]$$ as the set of feature indices, $$\mathcal{O} \subset \mathcal{I}$$ as the set of intial observed features and $$\mathcal{U} \subset \mathcal{I} \setminus \mathcal{O}$$ as the set of features to be acquired by the algorithm. We make use of a generator, which produces generates a subset $$\mathcal{V} \subset \mathcal{U}$$ of the features to save on querying cost. The remaining features in $$\mathcal{U} \setminus \mathcal{V}$$ are queried. We use $$p(x'[\mathcal{V}]|x[\mathcal{O}])$$ as a stochastic generator. The classifier is denoted by $$h(\bullet)$$. Then, the overall optimization objective is
+We use $$x \in \mathbb{R}^n$$ to denote a feature vector and $$y$$ to denote the classification label. We denote $$\mathcal{I} = [n]$$ as the set of feature indices, $$\mathcal{O} \subset \mathcal{I}$$ as the set of intial observed features and $$\mathcal{U} \subset \mathcal{I} \setminus \mathcal{O}$$ as the set of features to be acquired by the algorithm. We make use of a generator, which produces generates a subset $$\mathcal{V} \subset \mathcal{U}$$ of the features to save on querying cost. The remaining features in $$\mathcal{U} \setminus \mathcal{V}$$ are queried. We use $$p(x'[\mathcal{V}]\vert x[\mathcal{O}])$$ as a stochastic generator. The classifier is denoted by $$h(\bullet)$$. Then, the overall optimization objective is
 
 $$
-    loss(h,p,U,V|O) = \mathbb{E}_{x'[V] \sim p(\bullet|x[O])} l(h(x[O \cup U \setminus V] \cup x'[V]))
+    loss(h,p,U,V\vert O) = \mathbb{E}_{x'[V] \sim p(\bullet\vert x[O])} l(h(x[O \cup U \setminus V] \cup x'[V]))
 $$
 
 $$
-    min_{h,p,V_i,U_i} \sum_{i \in D} loss(h,p,U_i,V_i|O_i)
+    min_{h,p,V_i,U_i} \sum_{i \in D} loss(h,p,U_i,V_i\vert O_i)
 $$
 
 subject to the budget constraint $$\vert U_i \setminus V_i \vert \le q_{max}$$ for each point $$i \in D$$, the dataset.
@@ -46,10 +46,10 @@ We deploy mixture models on the partitioned data by training an independent clas
 We first pretrain the generator to model arbitrary conditionals on the data in a $$\beta$$-VAE style. We then alternate between training the classifier and a step of constructing the optimal $$\mathcal{U}$$ greedily. To that end, we construct a surrogate objective which is a function of $$\mathcal{U}$$, decoupling it from $$\mathcal{V}$$.
 
 $$
-F(h,p,U|O) = \Delta(U) l(h(x[O \cup U]), y) + (1-\Delta(U)) l(h(x[O] \cup x'[U]), y)
+F(h,p,U\vert O) = \Delta(U) l(h(x[O \cup U]), y) + (1-\Delta(U)) l(h(x[O] \cup x'[U]), y)
 $$
 
-The objective $$F(h,p,U|O)$$ is a linear combination of the loss from using oracle values for $$\mathcal{U}$$ and generating the full subset $$\mathcal{U}$$, weighted by the uncertainty of the generator $$\Delta(U)$$. The greedy algorithm greedily adds elements to $$\mathcal{U}$$ while the surrogate objective decreases.
+The objective $$F(h,p,U\vert O)$$ is a linear combination of the loss from using oracle values for $$\mathcal{U}$$ and generating the full subset $$\mathcal{U}$$, weighted by the uncertainty of the generator $$\Delta(U)$$. The greedy algorithm greedily adds elements to $$\mathcal{U}$$ while the surrogate objective decreases.
 
 We subsequently employ a greedy algorithm to construct $$\mathcal{V} \subset \mathcal{U}$$. This algorithm greedily adds elements from $$\mathcal{U}$$ to $$\mathcal{V}$$ while the overall objective decreases.
 
