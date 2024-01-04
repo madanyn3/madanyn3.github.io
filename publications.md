@@ -24,7 +24,10 @@ We deal with a feature acquisition task for classification. Primarily, we are gi
 We use $$x \in \mathbb{R}^n$$ to denote a feature vector and $$y$$ to denote the classification label. We denote $$\mathcal{I} = [n]$$ as the set of feature indices, $$\mathcal{O} \subset \mathcal{I}$$ as the set of intial observed features and $$\mathcal{U} \subset \mathcal{I} \setminus \mathcal{O}$$ as the set of features to be acquired by the algorithm. We make use of a generator, which produces generates a subset $$\mathcal{V} \subset \mathcal{U}$$ of the features to save on querying cost. The remaining features in $$\mathcal{U} \setminus \mathcal{V}$$ are queried. We use $$p(x'[\mathcal{V}]|x[\mathcal{O}])$$ as a stochastic generator. The classifier is denoted by $$h(\bullet)$$. Then, the overall optimization objective is
 
 $$
-    loss(h,p,U,V|O) &= \mathbb{E}_{x'[V] \sim p(\bullet|x[O])} l(h(x[O \cup U \setminus V] \cup x'[V])) \\
+    loss(h,p,U,V|O) = \mathbb{E}_{x'[V] \sim p(\bullet|x[O])} l(h(x[O \cup U \setminus V] \cup x'[V]))
+$$
+
+$$
     min_{h,p,V_i,U_i} \sum_{i \in D} loss(h,p,U_i,V_i|O_i)
 $$
 
