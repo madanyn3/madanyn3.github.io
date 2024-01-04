@@ -35,7 +35,7 @@ subject to the budget constraint $$\vert U_i \setminus V_i \vert \le q_{max}$$ f
 
 ## Proposed Approach
 
-<img src="../assets/profile.jpg">
+<img src="../assets/genex_pipeline.jpg">
 
 ### Data Partitioning
 To reduce the amount of heterogeneity in feature subsets available for classification, we cluster the data using the value of observed features $$x[\mathcal{O}]$$. We perform random hyperplane (RH) based clustering, which provides good bucket balance and per-instance objective as opposed to k-means and gaussian mixture clustering. 
@@ -61,7 +61,7 @@ During inference, the test instance is clustered using $$x[\mathcal{O}]$$. The o
 
 ## Results
 We plot accuracy v/s query cost for four datasets, compare GENEX against a variety of RL based and greedy baselines. Our experiments show a significant gain in accuracy as compared to state-of-the-art methods.
-<img src="../assets/genex_results.png">
+<img src="../assets/genex_results.jpg">
 
 ## Contacts
 For any questions/suggestions, please contact [Vedang Asgaonkar](mailto:vedang@cse.iitb.ac.in), [Aditya Jain](mailto:adityajainjhs@cse.iitb.ac.in) and [Abir De](mailto:abir@cse.iitb.ac.in)
