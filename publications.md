@@ -31,7 +31,7 @@ $$
     min_{h,p,V_i,U_i} \sum_{i \in D} loss(h,p,U_i,V_i|O_i)
 $$
 
-subject to the budget constraint $$|U_i \setminus V_i| \le q_{max}$$ for each point $$i \in D$$, the dataset.
+subject to the budget constraint $$\vert U_i \setminus V_i \vert \le q_{max}$$ for each point $$i \in D$$, the dataset.
 
 ## Proposed Approach
 ### Data Partitioning
@@ -48,6 +48,10 @@ We first pretrain the generator to model arbitrary conditionals on the data in a
 $$
 F(h,p,U|O) = \Delta(U) l(h(x[O \cup U]), y) + (1-\Delta(U)) l(h(x[O] \cup x'[U]), y)
 $$
+
 The objective $$F(h,p,U|O)$$ is a linear combination of the loss from using oracle values for $$\mathcal{U}$$ and generating the full subset $$\mathcal{U}$$, weighted by the uncertainty of the generator $$\Delta(U)$$. The greedy algorithm greedily adds elements to $$\mathcal{U}$$ while the surrogate objective decreases.
 
 We subsequently employ a greedy algorithm to construct $$\mathcal{V} \subset \mathcal{U}$$. This algorithm greedily adds elements from $$\mathcal{U}$$ to $$\mathcal{V}$$ while the overall objective decreases.
+
+### Inference
+During inference, the test instance is clustered using $$x[\mathcal{O}]$$. The optimal $$\mathcal{U}, \mathcal{V}$$ subsets and the classifier $$h$$ for this cluster will be used subsequently. The generator is used to generate $$x'[\mathcal{V}]$$ conditioned on $$x[\mathcal{O}]$$. We also query the values of $$x[\mathcal{U} \setminus \mathcal{V}]. Then, we perform classification using $$h(x[\mathcal{O} \cup \mathcal{U} \setminus \mathcal{V}] \cup x'[\mathcal{V}])$$. If the confidence of the classifier is low, we subsequently query $$x[\mathcal{V}]$$ and classift using $$h(x[\mathcal{O} \cup \mathcal{U}])$$.
