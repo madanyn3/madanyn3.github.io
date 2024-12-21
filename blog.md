@@ -1,6 +1,5 @@
 ---
 layout: page
-title: Blogs
 url: blogs
 ---
 
@@ -8,9 +7,8 @@ url: blogs
 
 Welcome to my blog section! Below are links to my posts:
 
-## Blog Posts
 <ul>
-  {% for post in site.posts %}
+  {% for post in site.blogs %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a> 
       <small>({{ post.date | date: "%Y-%m-%d" }})</small>
