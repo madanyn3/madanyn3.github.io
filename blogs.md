@@ -4,8 +4,9 @@ title: Blogs
 url: /blogs/
 ---
 
+#### Welcome to My Blog
 
-Welcome to my blog section! Below are links to my posts:
+This is where I share my thoughts, ideas, and updates on the mini-projects I work on from time to time. Since my thoughts are shaped by my experiences, they’re naturally influenced by my perspective. I’d love to hear your views and have a conversation about them!
 
 <ul>
   {% for post in site.blogs %}
