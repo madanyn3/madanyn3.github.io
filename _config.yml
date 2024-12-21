@@ -19,9 +19,9 @@ plugins:
 
 # Collections
 collections:
-  blogs:
+  blog:
     output: true
-    permalink: /blogs/:title/
+    permalink: /blog/:title/
 
 # Custom vars
 version:             3.14
