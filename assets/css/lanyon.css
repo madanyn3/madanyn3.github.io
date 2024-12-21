@@ -73,7 +73,9 @@ h1, h2, h3, h4, h5, h6 {
  */
 
 .container {
-  max-width: 28rem;
+  width: 90%;
+  max-width: none;
+  padding: 20px;
 }
 @media (min-width: 38em) {
   .container {
@@ -304,6 +306,8 @@ a.sidebar-nav-item:focus {
 
 .page,
 .post {
+  margin: 0;
+  padding:  0 20px;
   margin-bottom: 4em;
 }
 
