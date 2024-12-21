@@ -19,7 +19,7 @@ plugins:
 
 # Collections
 collections:
-  posts:
+  blogs:
     output: true
     permalink: /blogs/:title/
 
