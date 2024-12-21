@@ -4,7 +4,9 @@ title: Projects
 url: project
 ---
 
-Here is a subset of interesting projects I have done. Code for most of these and more can be found on my [github](https://github.com/VedangAsgaonkar).
+Under Construction 🚧👷
+
+<!-- Here is a subset of interesting projects I have done. Code for most of these and more can be found on my [github](https://github.com/VedangAsgaonkar).
 
 ## Data Science
 * Energy models for OoD detection
@@ -34,4 +36,4 @@ Here is a subset of interesting projects I have done. Code for most of these and
 ## Development
 * Smart contracts in Ethereum
 * Ambient light raytracer
-* Object oriented online learning environment
+* Object oriented online learning environment -->
