@@ -2,7 +2,6 @@
 layout: blog
 title: "My First Blog Post"
 date: 2024-12-21
-categories: blog
 url: firstblog
 ---
 
