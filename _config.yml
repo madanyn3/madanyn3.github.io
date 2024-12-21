@@ -1,17 +1,17 @@
 # Setup
-title:               'Vedang Asgaonkar'
-tagline:             'At the curtain of the waterfall'
+title:               'Madan Y N'
+tagline:             'At the crossroads of chaos and clarity'
 description:         'Skywalker'
-url:                 http://vedangasgaonkar.github.io
+url:                 http://madanyn3.github.io
 baseurl:             /
 paginate:            5
 permalink:           pretty
 
 # About/contact
 author:
-  name:              'Vedang Asgaonkar'
-  url:               https://github.com/VedangAsgaonkar/
-  email:             vedang@cse.iitb.ac.in
+  name:              'Madan Y N'
+  url:               https://github.com/madanyn3/
+  email:             madanyn3@gmail.com
 
 # Gems
 plugins:
