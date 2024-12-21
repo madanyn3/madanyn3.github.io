@@ -1,9 +1,8 @@
 ---
-layout: page
+layout: 
 url: blogs
 ---
 
-# Blogs 📝
 
 Welcome to my blog section! Below are links to my posts:
 
