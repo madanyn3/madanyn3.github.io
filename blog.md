@@ -4,9 +4,21 @@ title: Blogs
 url: blogs
 ---
 
-Some random shit
+# Blogs 📝
 
-This page is about some of my thoughts and ideas. It is greatly influenced by my experiences, the conversations I have with people and a few insightful books. By its very nature, this blog is an expression of opinion, so it is likely to be biased by my world view. Hit me up if you wish to share your thoughts regarding these blog posts.
+Welcome to my blog section! Below are links to my posts:
+
+## Blog Posts
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a> 
+      <small>({{ post.date | date: "%Y-%m-%d" }})</small>
+    </li>
+  {% endfor %}
+</ul>
+
+<!-- This page is about some of my thoughts and ideas. It is greatly influenced by my experiences, the conversations I have with people and a few insightful books. By its very nature, this blog is an expression of opinion, so it is likely to be biased by my world view. Hit me up if you wish to share your thoughts regarding these blog posts.
 
 ## Faith and Society
 #### 9 Aug '22
@@ -28,4 +40,4 @@ Throughout history, religion has played a bigger role in uniting people than in 
 Sadly for all these feathers that religion has in its hat, it comes with humanity's greatest flaw. The tendency to dominate, to impose oneself on others, with the belief that it is for the better. This missionary behavior has been seen in all of the world's large religions, and is the fuel for conflict. If only people of different faiths would be able to understand that their religions are only a thin veil over the same underlying values, this would lead to huge progress.
 
 
-It is wrong to claim that religion has only done wrong the world. Its historical achievements and its role in cementing the human society largely outweigh its divisive effect. And if we were to blame religion for the conflict it causes, we should look at our own nations, they were not formed without eons of imperial ambitions and genocidal wars on nationalist ambitions. Rather we should accept religion for its past, the role it has played in shaping today's world. The shared fictions it creates, and the hope it provides to prevent the world from falling into anarchy, is essential for social stability. At the same time, we must make sure that people understand the underlying virtues of their religion, the values it teaches, so that whenever their fictions and rituals clash with someone else's they are able to reason about these virtues and not fight over their narratives.
+It is wrong to claim that religion has only done wrong the world. Its historical achievements and its role in cementing the human society largely outweigh its divisive effect. And if we were to blame religion for the conflict it causes, we should look at our own nations, they were not formed without eons of imperial ambitions and genocidal wars on nationalist ambitions. Rather we should accept religion for its past, the role it has played in shaping today's world. The shared fictions it creates, and the hope it provides to prevent the world from falling into anarchy, is essential for social stability. At the same time, we must make sure that people understand the underlying virtues of their religion, the values it teaches, so that whenever their fictions and rituals clash with someone else's they are able to reason about these virtues and not fight over their narratives. -->
