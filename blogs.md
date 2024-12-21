@@ -8,7 +8,7 @@ url: /blogs/
 Welcome to my blog section! Below are links to my posts:
 
 <ul>
-  {% for post in site.collections.blogs.docs %}
+  {% for post in site.blogs %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a> 
       <small>({{ post.date | date: "%Y-%m-%d" }})</small>
