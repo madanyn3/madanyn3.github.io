@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Blogs
-url: blogs/intro
+url: blogs
 ---
 
 This page is about some of my thoughts and ideas. It is greatly influenced by my experiences, the conversations I have with people and a few insightful books. By its very nature, this blog is an expression of opinion, so it is likely to be biased by my world view. Hit me up if you wish to share your thoughts regarding these blog posts.
