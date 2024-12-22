@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Random Thoughts"
-date: 2024-12-21
 url: randomthoughts
 ---
 
@@ -10,7 +9,7 @@ url: randomthoughts
 I was thinking of capturing human behavior in a single sentence. After some thought, listing the essential features of a human being—A species of the order Primate. I took help from my dear friend ChatGPT in collapsing them into a single sentence. <br>
 **Humans are a bunch of self-interested, territorial, social beings driven by the instincts to eat, survive, and reproduce**
 
-### Define Life
+### Definition of Life
 
 One can define life in a number of ways. Some are philosophical, some others are poetical. What is life at its fundamental level? I wanted a simple definition of life, one devoid of all the adjectives. But it shouldn't be too simplified as to talk in terms of quantum electrodynamics. I thought of this <br>
 **Life - A Gigantic Synchrony of Chemical Reactions**

@@ -4,6 +4,8 @@ _site
 .ruby-version
 .jekyll-cache
 
+_blogs\YannLeCunnThoughtExpt.md
+
 # Numerous always-ignore extensions
 *.diff
 *.err
