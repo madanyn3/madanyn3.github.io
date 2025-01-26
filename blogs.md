@@ -15,13 +15,12 @@ This is where I share my thoughts, ideas, and updates on the mini-projects I wor
       <small>({{ post.date | date: "%Y-%m-%d" }})</small>
     </li>
   {% endfor %}
-</ul>
 
-<li>
-    <a href="https://medium.com/@myn.create/why-apple-silicon-is-better-7d6628aa0c3e" target="_blank" rel="noopener noreferrer">
+  <li>
+    <a href="https://medium.com/@myn.create/why-apple-silicon-is-better-7d6628aa0c3e" target="_blank"         rel="noopener noreferrer">
       Why Apple Silicon is Better
     </a> 
-    <small>(Published on Medium)</small>
+    <small>(2025-01-26)</small>
   </li>
 </ul>
 
