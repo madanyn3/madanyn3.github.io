@@ -17,6 +17,14 @@ This is where I share my thoughts, ideas, and updates on the mini-projects I wor
   {% endfor %}
 </ul>
 
+<li>
+    <a href="https://medium.com/@myn.create/why-apple-silicon-is-better-7d6628aa0c3e" target="_blank" rel="noopener noreferrer">
+      Why Apple Silicon is Better
+    </a> 
+    <small>(Published on Medium)</small>
+  </li>
+</ul>
+
 <!-- This page is about some of my thoughts and ideas. It is greatly influenced by my experiences, the conversations I have with people and a few insightful books. By its very nature, this blog is an expression of opinion, so it is likely to be biased by my world view. Hit me up if you wish to share your thoughts regarding these blog posts.
 
 ## Faith and Society
