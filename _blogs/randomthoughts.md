@@ -6,8 +6,12 @@ url: randomthoughts
 
 ### Human - A Primate
 
-I was thinking of capturing human behavior in a single sentence. After some thought, listing the essential features of a human being—A species of the order Primate. I took help from my dear friend ChatGPT in collapsing them into a single sentence. <br>
-**Humans are a bunch of self-interested, territorial, social beings driven by the instincts to eat, survive, and reproduce**
+<details>
+    <summary>Can we define humans in a single sentence?</summary>
+
+    I was thinking of capturing human behavior in a single sentence. After some thought, listing the essential features of a human being—A species of the order Primate. I took help from my dear friend ChatGPT in collapsing them into a single sentence. <br>
+    **Humans are a bunch of self-interested, territorial, social beings driven by the instincts to eat, survive, and reproduce**
+</details>
 
 ### Definition of Life
 
