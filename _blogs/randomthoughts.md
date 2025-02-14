@@ -9,7 +9,7 @@ url: randomthoughts
 <details>
     <summary>Can we capture whole of human behaviour in a single sentence?</summary>
     <p>I was thinking of capturing human behavior in a single sentence. After some thought, listing the essential features of a human being—A species of the order Primate. I took help from my dear friend ChatGPT in collapsing them into a single sentence. <br>
-    <stong>Humans are a bunch of self-interested, territorial, social beings driven by the instincts to eat, survive, and reproduce</strongsss></p>
+    <stong>Humans are a bunch of self-interested, territorial, social beings driven by the instincts to eat, survive, and reproduce</strong></p>
 </details>
 
 ### Life - Cosmic Miracle or Pure Luck?
