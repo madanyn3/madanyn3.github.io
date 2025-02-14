@@ -13,7 +13,7 @@ I enjoy working out, playing badminton. I think I am an expert cricket🏏 analy
 Not a big music head! I listen to Metallica (the OG 80s) sometimes during work. Otherwise I prefer lo-fi music filled with violin and piano.
 
 ## Movies and TV Shows 🎥
-I prefer movies and tv shows with a string story line. I can say I have watched many of the OG movies and Shows. Currently have developed a frenzy for serial killer thrillers!
+I prefer movies and tv shows with a strong story line. I can say I have watched many of the OG movies and Shows. Currently have developed a frenzy for serial killer thrillers!
 
 ## Books 📖
 Until recently, my reading mostly revolved around course material. Similar to in movies, I prefer books that are likely going to leave a strong impression on me. Currently engaged in DUNE, Project Hail Mary.

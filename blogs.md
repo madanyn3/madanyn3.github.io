@@ -12,7 +12,7 @@ This is where I share my thoughts, ideas, and updates on the mini-projects I wor
   {% for post in site.blogs %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a> 
-      <small>({{ post.date | date: "%Y-%m-%d" }})</small>
+      <small>(2024-12-23)</small>
     </li>
   {% endfor %}
 
