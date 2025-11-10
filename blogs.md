@@ -26,7 +26,7 @@ This is where I share my thoughts, ideas, and updates on the mini-projects I wor
   <a href="https://medium.com/@myn.create/life-in-disequilibrium-a9524f2e7fee" target="_blank"         rel="noopener noreferrer">
       Life in Disequilibrium
     </a> 
-    <small>(2025-01-26)</small>
+    <small>(2025-11-10)</small>
   </li>
 </ul>
 
