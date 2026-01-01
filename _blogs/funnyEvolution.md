@@ -2,6 +2,7 @@
 layout: post
 title: "Could Evolution Have Done Better?"
 url: funnyEvolution
+date: 2024-09-26
 ---
 
 Ever woken up from an 8-hour sleep and actually felt more tired than you were before? A doctor might diagnose this in a number of ways, but surely a cup of black coffee should fix it. A recent such episode got me into thinking _could evolution have done better with sleep?_. I know there are plenty of upsides to sleep, and matter of fact, a human body will start to deteriorate if deprived of sleep long enough. Sleeping is a biological need for humans, like it is for every animal. Our body does a lot of important things during sleep,<br>
@@ -9,7 +10,7 @@ Ever woken up from an 8-hour sleep and actually felt more tired than you were be
 - We replay experiences and consolidate memory for storage<br>
 - There is a real cleansing of the brain with the removal of waste products released by neurons<br>
 
-Many other processes happen in sleep, but these are the uniquely sleep-dependent ones. Bottom line: you can’t skip it. <br>
+Many other processes happen in sleep, but these are the uniquely sleep-dependent ones. Bottom line: you can't skip it. <br>
 
 All things said, imagine if sleep were not as stringent a requirement. We recover one-third of our life that would otherwise go _waste_ in sleep, think about how many more places you could visit in your trips. In fact, there are some animals that are very different from us in this respect. Dolphins, Seals, etc. do _unihemispheric sleep_ i.e., only one half of the brain sleeps. Fish and many migratory birds take _microsleeps_ i.e., seconds-long naps scattered across the day. So, why didn't humans evolve either of those kinds of sleep? Think about how much it would've helped out ancestors in keeping predators at bay-no taking turns in guarding the fire camp. <br>
 

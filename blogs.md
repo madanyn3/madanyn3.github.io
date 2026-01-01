@@ -8,11 +8,29 @@ url: /blogs/
 
 This is where I share my thoughts, ideas, and updates on the mini-projects I work on from time to time. Since my thoughts are shaped by my experiences, they’re naturally influenced by my perspective. I’d love to hear your views and have a conversation about them!
 
+{% comment %}
+Create an array to hold all blog entries (both Jekyll posts and external links)
+{% endcomment %}
+{% assign all_blogs = "" | split: "" %}
+
+{% comment %}
+Add Jekyll collection posts to the array
+{% endcomment %}
+{% for post in site.blogs %}
+  {% assign blog_entry = post %}
+  {% assign all_blogs = all_blogs | push: blog_entry %}
+{% endfor %}
+
+{% comment %}
+Sort all blogs by date in ascending order (earliest first)
+{% endcomment %}
+{% assign sorted_blogs = all_blogs | sort: "date" %}
+
 <ul>
-  {% for post in site.blogs %}
+  {% for blog in sorted_blogs %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a> 
-      <small>(2024-12-23)</small>
+      <a href="{{ blog.url }}">{{ blog.title }}</a> 
+      <small>({{ blog.date | date: "%Y-%m-%d" }})</small>
     </li>
   {% endfor %}
 
