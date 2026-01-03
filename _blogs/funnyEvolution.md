@@ -2,7 +2,7 @@
 layout: post
 title: "Could Evolution Have Done Better?"
 url: funnyEvolution
-date: 2024-09-26
+date: 2025-09-26
 category: quick-read
 ---
 

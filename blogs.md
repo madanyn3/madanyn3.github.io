@@ -12,8 +12,6 @@ This is where I share my thoughts, ideas, and updates on the mini-projects I wor
 
 ## 📝 Quick Reads
 
-Short thoughts, reflections, and casual musings.
-
 {% comment %}
 Group Quick Reads by series
 {% endcomment %}

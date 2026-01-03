@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Stranger Things"
-url: strangerThings
+title: "Finale - First Thoughts"
+url: strangerThings/finale-first-thoughts
 date: 2026-01-01
 category: quick-read
 series: stranger-things

@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Let's Talk About Eleven"
+url: strangerThings/lets-talk-about-eleven
+date: 2026-01-01
+category: quick-read
+series: stranger-things
+---
+
+![Stranger Things - Eleven](/assets/images/stranger-things-eleven.jpg)
+
+Let's talk about Eleven, her ending in particular. Since the beginning of the show, she has been the lead character and has been my personal female character. The importance of her character was diminished to some extent in the later seasons as the party grew and fighting with the monsters involved more and more planning and team work rather than El just smoking the guns. Even then, she remained the ultimate link between Hakwins and the upside down and everything beyond. Will did finally pick up in season 5 but it is no secret that the party wouldn't have made it to season 5 if not for El. Remember her in seasons 1, 2 and 3? It took a while for her to regain power in season 4 but she was pivotal in saving Max and the rest. As I noted in my immediate thoughts, for the story of Hawkins to end, El had to die. I expected that her death will be something similar to her disappearance in season 1 (the goodbye Mike in Hawkins Middle School classroom as she sent the Demogorgon back to Abyss). I thought she would sacrifice herself in order to kill Henry and end the Mind Flayer shenanigans once and for all. What happened was completely different. 
+<br>
+
+Let's first look at what everyone thinks happened. The party kills Henry, defeats the Mind Flayer. Murray sets off the bomb and everyone makes their way out of the upside down through the mother gate at MAC-Z. We see El beside Mike the whole time. Military was waiting for them and they catch them all, only to find that El has jumped down the trunk and is standing in the upside down at the edge of the portal. She says her goodbye to Mike and to everyone and finally her story ends with the collapse of the upside down. This story fits well with what El and Kali had discussed. There is no way things could've gone back to normal had Kay got hold of Eleven. But, it has major flaws in it. To start with, how did Eleven dodge everyone and get inside the upside down? It is very clear that the trunk door was closed before soldiers opened it and one soldier is seen taking El out of the truck too. How did she get past that soldier and run through the gate and go in the upside down. There is another question too. How did El use her powers to talk to Mike inside her mind with all the sonic booms (the unexplained antennas that stops her from using her powers) pointed right at her? There is one more point that people have pointed out, why isn't her nose bleeding when she is using her powers for one last time? This is very subtle thing but the ones above are major arguments against the first story.
