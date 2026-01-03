@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Blogs
-url: /blogs/
+permalink: /blogs/
 ---
 
 #### Welcome to My Blog
@@ -27,7 +27,7 @@ Display series subsections
   <ul>
     {% for post in series_group.items %}
       <li>
-        <a href="{{ post.url }}">{{ post.title }}</a> 
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a> 
         <small>({{ post.date | date: "%Y-%m-%d" }})</small>
       </li>
     {% endfor %}
@@ -42,10 +42,11 @@ Display standalone quick reads
   <ul>
     {% for post in standalone_posts %}
       <li>
-        <a href="{{ post.url }}">{{ post.title }}</a> 
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a> 
         <small>({{ post.date | date: "%Y-%m-%d" }})</small>
       </li>
     {% endfor %}
+
   </ul>
 {% endif %}
 

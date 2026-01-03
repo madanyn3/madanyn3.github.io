@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Could Evolution Have Done Better?"
-url: funnyEvolution
 date: 2025-09-26
 category: quick-read
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Finale - First Thoughts"
-permalink: /strangerThings/finale-first-thoughts/
 date: 2026-01-01
 category: quick-read
 series: stranger-things
@@ -18,4 +17,4 @@ Personally, there are a lot of plot holes in the show, especially in the final s
 These are my first thoughts about the finale and the show's ending overall. I plan to delve deep into the details about the plot overall, the ending, the characters, El in particular. I always felt that for everthing to end and for life on Earth to get back to normal, El must die. She is the heart of the plot. Yes, she ended things on her terms but when all the characters got such good endings, maybe El could have too? Or would that have been too much? 
 <br>
 
-Finally, Netflix has confirmed that there will be spin-offs and I hope they make one about Steve and Dustin. At this point it is a cliché to say that. A spin-off about Mike would be interesting too. It would be interesting to see how he shapes his life moving forward.
+Finally, Netflix has confirmed that there will be spin-offs and I hope they make one about Steve and Dustin. At this point it is a cliché to say that. A spin-off about Mike would be interesting too. It would be interesting to see how he shapes his life moving forward..

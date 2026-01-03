@@ -2,8 +2,8 @@
 title:               'Madan Y N'
 tagline:             'At the crossroads of chaos and clarity'
 description:         'Skywalker'
-url:                 http://madanyn3.github.io
-baseurl:             /
+url:                 https://madanyn3.github.io
+baseurl:             ""
 paginate:            5
 permalink:           pretty
 
