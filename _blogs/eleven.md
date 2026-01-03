@@ -5,6 +5,7 @@ permalink: /blogs/lets-talk-about-eleven/
 date: 2025-01-04
 category: quick-read
 series: stranger-things
+serial_number: 2
 ---
 
 <img src="/assets/images/stranger-things-eleven.jpg" alt="Stranger Things - Eleven" style="width: 40%; max-width: 700px; height: auto; display: block; margin: 20px auto;">

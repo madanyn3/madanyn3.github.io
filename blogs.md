@@ -25,7 +25,8 @@ Display series subsections
 {% for series_group in series_posts %}
   <h3>{{ series_group.name | replace: "-", " " | capitalize }}</h3>
   <ul>
-    {% for post in series_group.items %}
+    {% assign sorted_items = series_group.items | sort: "serial_number" %}
+    {% for post in sorted_items %}
       <li>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a> 
         <small>({{ post.date | date: "%Y-%m-%d" }})</small>

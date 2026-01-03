@@ -5,6 +5,7 @@ permalink: /blogs/finale-first-thoughts/
 date: 2026-01-01
 category: quick-read
 series: stranger-things
+serial_number: 1
 ---
 
 <img src="/assets/images/stranger-things-title3.jpg" alt="Stranger Things - Finale" style="width: 60%; max-width: 700px; height: auto; display: block; margin: 20px auto;">
