@@ -2,7 +2,7 @@
 layout: post
 title: "Let's Talk About Eleven"
 permalink: /blogs/lets-talk-about-eleven/
-date: 2026-01-03
+date: 2025-01-03
 category: quick-read
 series: stranger-things
 ---
