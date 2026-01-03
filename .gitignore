@@ -43,3 +43,9 @@ validation-report.json
 # Folders to ignore
 node_modules
 bower_components
+
+Gemfile
+Gemfile.lock
+LOCAL_SETUP_GUIDE.md
+assets/images/stranger-things-title.jpg
+assets/images/stranger-things-title2.jpg
