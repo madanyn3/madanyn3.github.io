@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Random Thoughts"
+permalink: /blogs/random-thoughts/
 date: 2024-09-25
 category: quick-read
 ---

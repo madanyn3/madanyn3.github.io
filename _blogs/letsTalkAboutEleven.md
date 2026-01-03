@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Let's Talk About Eleven"
-date: 2026-01-04
+permalink: /blogs/lets-talk-about-eleven/
+date: 2026-01-03
 category: quick-read
 series: stranger-things
 ---

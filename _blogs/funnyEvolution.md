@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Could Evolution Have Done Better?"
+permalink: /blogs/funny-evolution/
 date: 2025-09-26
 category: quick-read
 ---

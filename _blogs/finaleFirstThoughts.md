@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Finale - First Thoughts"
+permalink: /blogs/finale-first-thoughts/
 date: 2026-01-01
 category: quick-read
 series: stranger-things
