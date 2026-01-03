@@ -3,6 +3,7 @@ layout: post
 title: "Could Evolution Have Done Better?"
 url: funnyEvolution
 date: 2024-09-26
+category: quick-read
 ---
 
 Ever woken up from an 8-hour sleep and actually felt more tired than you were before? A doctor might diagnose this in a number of ways, but surely a cup of black coffee should fix it. A recent such episode got me into thinking _could evolution have done better with sleep?_. I know there are plenty of upsides to sleep, and matter of fact, a human body will start to deteriorate if deprived of sleep long enough. Sleeping is a biological need for humans, like it is for every animal. Our body does a lot of important things during sleep,<br>

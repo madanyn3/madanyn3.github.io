@@ -3,6 +3,7 @@ layout: post
 title: "Random Thoughts"
 url: randomthoughts
 date: 2024-09-25
+category: quick-read
 ---
 
 ### Humans - The Primate and The Social Life
