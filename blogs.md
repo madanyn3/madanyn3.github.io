@@ -69,4 +69,10 @@ Longer, detailed explorations and analyses.
     </a> 
     <small>(2025-11-10)</small>
   </li>
+  <li>
+    <a href="/blogs/how-much-of-your-life-have-you-spent/">
+      How Much of Your Life Have You Spent?
+    </a> 
+    <small>(2026-03-25)</small>
+  </li>
 </ul>
