@@ -26,8 +26,16 @@
     {% endfor %}
 
     <a class="sidebar-nav-item" href="https://github.com/madanyn3/madanyn3.github.io">GitHub project</a>
+    
+    <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
+      <span class="theme-toggle-icon"></span>
+      <span class="theme-toggle-text">Dark Mode</span>
+    </button>
+    
     <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
   </nav>
+
+  <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
 
   <div class="sidebar-item">
     <p>

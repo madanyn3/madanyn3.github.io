@@ -1,0 +1,93 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #515151;
+  --heading-color: #313131;
+  --link-color: #268bd2;
+  --border-color: #eeeeee;
+  --code-bg: #f9f9f9;
+  --code-color: #bf616a;
+  --blockquote-text: #7a7a7a;
+  --blockquote-border: #e5e5e5;
+  --masthead-title: #505050;
+  --masthead-small: #c0c0c0;
+  --sidebar-bg: #202020;
+  --sidebar-text: rgba(255, 255, 255, 0.6);
+  --sidebar-link: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-toggle-bg: #ffffff;
+  --sidebar-toggle-color: #505050;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #b0b0b0;
+  --heading-color: #eeeeee;
+  --link-color: #58a6ff;
+  --border-color: #30363d;
+  --code-bg: #1a1a1b;
+  --code-color: #ff7b72;
+  --blockquote-text: #8b949e;
+  --blockquote-border: #30363d;
+  --masthead-title: #f0f6fc;
+  --masthead-small: #8b949e;
+  --sidebar-bg: #0d1117;
+  --sidebar-text: rgba(240, 246, 252, 0.7);
+  --sidebar-link: #f0f6fc;
+  --sidebar-border: rgba(240, 246, 252, 0.1);
+  --sidebar-toggle-bg: #0d1117;
+  --sidebar-toggle-color: #f0f6fc;
+}
+
+/* Base resets using variables */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Transition for smooth switching */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--sidebar-link);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--sidebar-border);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Syntax Highlighting Dark Mode Overrides */
+[data-theme="dark"] .highlight .c { color: #8b949e; } /* Comment */
+[data-theme="dark"] .highlight .k { color: #ff7b72; } /* Keyword */
+[data-theme="dark"] .highlight .s { color: #a5d6ff; } /* String */
+[data-theme="dark"] .highlight .nt { color: #7ee787; } /* Tag */
+[data-theme="dark"] .highlight .na { color: #d2a8ff; } /* Attribute */
+[data-theme="dark"] .highlight .nf { color: #d2a8ff; } /* Function */
+[data-theme="dark"] .highlight .nc { color: #ffa657; } /* Class */
+[data-theme="dark"] .highlight .m { color: #d2a8ff; } /* Number */
+[data-theme="dark"] .highlight .o { color: #f0f6fc; } /* Operator */
+
+/* Sidebar Toggle SVG adjustment */
+[data-theme="dark"] .sidebar-toggle::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23f0f6fc' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat;
+}
