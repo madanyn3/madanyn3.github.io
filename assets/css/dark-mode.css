@@ -20,22 +20,22 @@
 
 [data-theme="dark"] {
   --bg-color: #121212;
-  --text-color: #b0b0b0;
-  --heading-color: #eeeeee;
+  --text-color: #e6e6e6;
+  --heading-color: #ffffff;
   --link-color: #58a6ff;
   --border-color: #30363d;
   --code-bg: #1a1a1b;
   --code-color: #ff7b72;
   --blockquote-text: #8b949e;
   --blockquote-border: #30363d;
-  --masthead-title: #f0f6fc;
-  --masthead-small: #8b949e;
+  --masthead-title: #ffffff;
+  --masthead-small: #a0a0a0;
   --sidebar-bg: #0d1117;
   --sidebar-text: rgba(240, 246, 252, 0.7);
   --sidebar-link: #f0f6fc;
   --sidebar-border: rgba(240, 246, 252, 0.1);
-  --sidebar-toggle-bg: #0d1117;
-  --sidebar-toggle-color: #f0f6fc;
+  --sidebar-toggle-bg: #1a1a1b;
+  --sidebar-toggle-color: #ffffff;
 }
 
 /* Base resets using variables */
@@ -45,34 +45,46 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
+/* Fix for hardcoded drop caps in blog posts */
+span[style*="color: #313131"], 
+span[style*="color:#313131"] {
+  color: var(--heading-color) !important;
+}
+
 /* Transition for smooth switching */
 * {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-/* Theme Toggle Button Styles */
+/* Theme Toggle Button Styles - Top Right Positioned */
 .theme-toggle {
-  background: none;
-  border: none;
-  color: var(--sidebar-link);
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  width: 100%;
-  text-align: left;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-  background-color: var(--sidebar-border);
+  background-color: var(--border-color);
+  transform: translateY(-1px);
 }
 
 .theme-toggle svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   fill: currentColor;
 }
 
