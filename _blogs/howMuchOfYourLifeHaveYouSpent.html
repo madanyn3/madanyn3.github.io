@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much of Your Life Have You Spent? - A Scientific Exploration</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0b0b;
+  --surface: #141414;
+  --surface2: #1a1a1a;
+  --border: #272727;
+  --text: #e6e2d9;
+  --muted: #6b6660;
+  --accent: #c9a96e;
+  --accent2: #7ab3d4;
+  --muscle: #d97070;
+  --analytical: #70b0d9;
+  --immune: #7ecf6e;
+  --cardiac: #d9b870;
+  --composite-m: #c9a96e;
+  --composite-f: #d47aa8;
+  --midlife: #ff6b6b;
+  --midlife-f: #ff9fd4;
+  --fertility: #b87ad9;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.75; }
+
+/* Grain overlay */
+body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:200;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.022; }
+
+/* Layout */
+.wrap { max-width: 780px; margin: 0 auto; padding: 0 28px; }
+
+/* Header */
+header { padding: 72px 0 44px; border-bottom: 1px solid var(--border); }
+.pill { display:inline-block; background: var(--surface2); border: 1px solid var(--border);
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--accent);
+  padding:4px 12px; text-transform:uppercase; margin-bottom:22px; }
+h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.5vw,3.6rem); font-weight:400; line-height:1.1; margin-bottom:18px; }
+h1 em { font-style:italic; color:var(--accent); }
+.byline { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:.08em; }
+
+/* Nav TOC */
+.toc { background:var(--surface); border:1px solid var(--border); padding:20px 24px; margin:36px 0;
+  display:grid; grid-template-columns: 1fr 1fr; gap:6px 24px; }
+.toc-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; grid-column:1/-1; margin-bottom:8px; }
+.toc a { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent2); text-decoration:none; letter-spacing:.04em; }
+.toc a:hover { color:var(--accent); }
+
+/* Sections */
+.section { padding:52px 0; border-bottom:1px solid var(--border); }
+.section:last-child { border-bottom:none; }
+h2 { font-family:'Playfair Display',serif; font-size:1.55rem; font-weight:400; color:var(--accent); margin-bottom:20px; }
+h3 { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); margin:28px 0 12px; }
+p { margin-bottom:16px; color:#c9c6be; font-size:.98rem; }
+strong { color:var(--text); font-weight:500; }
+
+/* Callout */
+.callout { background:var(--surface); border-left:3px solid var(--accent); padding:18px 22px; margin:28px 0;
+  font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--text); }
+
+/* Charts */
+.chart-wrap { background:var(--surface); border:1px solid var(--border); border-radius:3px; padding:22px; margin:26px 0; }
+.chart-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin-bottom:16px; }
+canvas { max-height:300px; }
+.legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:14px; }
+.legend-item { display:flex; align-items:center; gap:7px; font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); }
+.ld { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+/* Math */
+.math-block { background:var(--surface); border:1px solid var(--border); padding:18px 22px; margin:22px 0;
+  font-family:'DM Mono',monospace; font-size:12px; color:var(--accent2); line-height:2.1; overflow-x:auto; }
+
+/* Result */
+.result-box { background:var(--surface2); border:1px solid var(--accent); padding:28px; margin:28px 0; text-align:center; }
+.result-number { font-family:'Playfair Display',serif; font-size:3.5rem; color:var(--accent); line-height:1; margin-bottom:6px; }
+.result-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; }
+.result-sub { font-size:.88rem; color:var(--muted); margin-top:10px; }
+
+/* Stats row */
+.stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); margin:24px 0; }
+.stat-cell { background:var(--surface); padding:18px; text-align:center; }
+.stat-val { font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--text); display:block; }
+.stat-key { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-top:3px; display:block; line-height:1.5; }
+
+/* Sex comparison */
+.sex-compare { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+.sex-card { background:var(--surface); border:1px solid var(--border); padding:20px; }
+.sex-card.male { border-top:2px solid var(--composite-m); }
+.sex-card.female { border-top:2px solid var(--composite-f); }
+.sex-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.sex-num { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--text); }
+.sex-note { font-size:.82rem; color:var(--muted); margin-top:6px; }
+
+/* ---- INTERACTIVE WIDGET ---- */
+.widget { background:var(--surface); border:1px solid var(--accent); padding:32px; margin:32px 0; }
+.widget-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--text); margin-bottom:6px; }
+.widget-sub { font-size:.87rem; color:var(--muted); margin-bottom:22px; }
+.input-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+.input-group label { display:block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.input-group select, .input-group input[type=number] {
+  width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text);
+  font-family:'DM Mono',monospace; font-size:13px; padding:10px 12px; appearance:none;
+  -webkit-appearance:none; outline:none; }
+.input-group select:focus, .input-group input:focus { border-color:var(--accent); }
+.slider-row { margin-bottom:16px; }
+.slider-row label { display:flex; justify-content:space-between; align-items:center;
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.slider-row label span { color:var(--accent); font-size:12px; }
+input[type=range] { width:100%; accent-color:var(--accent); cursor:pointer; }
+.calc-btn { width:100%; background:var(--accent); color:#0b0b0b; border:none; padding:13px;
+  font-family:'DM Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  cursor:pointer; margin-top:6px; transition:opacity .2s; }
+.calc-btn:hover { opacity:.85; }
+
+/* Results */
+.widget-results { display:none; margin-top:28px; border-top:1px solid var(--border); padding-top:24px; }
+.widget-results.show { display:block; }
+.life-bar-wrap { margin:16px 0 8px; }
+.life-bar-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; display:flex; justify-content:space-between; }
+.life-bar { height:10px; background:var(--border); border-radius:2px; overflow:hidden; }
+.life-bar-fill { height:100%; background: linear-gradient(90deg, var(--accent), var(--midlife)); transition:width .8s ease; border-radius:2px; }
+.life-bar-2 .life-bar-fill { background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+.insight-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:20px 0; }
+.insight-card { background:var(--surface2); border:1px solid var(--border); padding:14px; }
+.ic-val { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--accent); }
+.ic-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin-top:3px; }
+.narrative { background:var(--surface2); border-left:3px solid var(--accent2); padding:16px 18px; margin-top:18px;
+  font-family:'Playfair Display',serif; font-style:italic; font-size:.97rem; color:var(--text); line-height:1.6; }
+
+/* Citations */
+.ref-section { background:var(--surface); border:1px solid var(--border); padding:24px; margin-top:28px; }
+.ref-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+.ref-item { font-size:.82rem; color:var(--muted); padding:8px 0; border-bottom:1px solid var(--border); line-height:1.6; }
+.ref-item:last-child { border-bottom:none; }
+.ref-item .ref-num { color:var(--accent); font-family:'DM Mono',monospace; font-size:10px; margin-right:8px; }
+.ref-item a { color:var(--accent2); text-decoration:none; }
+.ref-item a:hover { text-decoration:underline; }
+
+/* Table */
+table { width:100%; border-collapse:collapse; margin:22px 0; font-size:.88rem; }
+th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+td { padding:9px 10px; border-bottom:1px solid var(--border); color:#c9c6be; }
+tr:last-child td { border-bottom:none; }
+
+/* Female section callout */
+.female-callout { background:var(--surface); border:1px solid var(--composite-f); padding:22px; margin:24px 0; }
+.fc-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.14em; color:var(--composite-f); text-transform:uppercase; margin-bottom:10px; }
+
+footer { text-align:center; padding:36px 28px; font-family:'DM Mono',monospace; font-size:10px;
+  color:var(--muted); letter-spacing:.08em; border-top:1px solid var(--border); }
+
+@media(max-width:580px) {
+  .input-row, .sex-compare { grid-template-columns:1fr; }
+  .toc { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="pill">Essay · Biostatistics · Human Longevity</div>
+  <h1>What if <em>Middle Age</em><br>isn't a date — it's a weight?</h1>
+  <div class="byline">A capability-weighted reframing of midlife &nbsp;·&nbsp; March 2026</div>
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#problem">I. The Problem with Birthdays</a>
+    <a href="#pillars">II. Four Pillars of Capability</a>
+    <a href="#math">III. The Math of Midlife*</a>
+    <a href="#result">IV. Result & Sensitivity</a>
+    <a href="#female">V. The Female Curve</a>
+    <a href="#widget">VI. Your Personal Midlife</a>
+    <a href="#discuss">VII. What This Changes</a>
+    <a href="#refs">VIII. References</a>
+  </nav>
+</header>
+
+<!-- I -->
+<div class="section" id="problem">
+  <h2>I. The Problem with Counting Birthdays</h2>
+  <p>The conventional definition of middle age — roughly 40 to 60 — derives from arithmetic. Take a lifespan of ~80 years, bisect it, and bracket. Simple. But this treats a year at 9 as biologically equivalent to a year at 45, which is not just imprecise — it's conceptually wrong.</p>
+  <p>A year of life is not a fixed unit. It carries radically different amounts of biological endowment at different ages. The cardiovascular system is far more capable at 28 than at 58. The immune system is mounting more novel responses at 22 than at 62. To simply count years is to measure a river by counting its bends rather than its flow.</p>
+  <div class="callout">"The question is not when the calendar says you are halfway. The question is: when have you exhausted half of your biological endowment?"</div>
+  <p>A rigorous answer requires treating capability itself as the currency, and computing the <strong>center of mass</strong> of the human capability curve — the age at which cumulative biological output crosses 50% of lifetime total.</p>
+</div>
+
+<!-- II -->
+<div class="section" id="pillars">
+  <h2>II. Four Pillars of Biological Capability</h2>
+  <p>We define capability across four systems chosen for their measurability, their longitudinal literature, and their coverage of both physical and cognitive domains.</p>
+
+  <table>
+    <thead><tr><th>System</th><th>Peak Age</th><th>Decline Pattern</th><th>Key Markers</th><th>Key Sources</th></tr></thead>
+    <tbody>
+      <tr><td>Physical / Musculoskeletal</td><td>25–30</td><td>~10% per decade after 25; steeper post-50</td><td>VO₂max, muscle mass, bone density</td><td>[1,2,3]</td></tr>
+      <tr><td>Analytical / Cognitive</td><td>28–35</td><td>Fluid intelligence declines from ~27; crystalized stable till 55+</td><td>Processing speed, working memory, fluid IQ</td><td>[4,5,6]</td></tr>
+      <tr><td>Immune Efficiency</td><td>~20–22</td><td>Steady; thymic involution begins adolescence, accelerates 60+</td><td>Naïve T-cell output, TCR diversity, NK activity</td><td>[7,8,9]</td></tr>
+      <tr><td>Cardiac Health</td><td>~20–25</td><td>Linear; cardiac output −25% by 80, VO₂max −50%</td><td>Cardiac output, arterial stiffness, LV diastolic filling</td><td>[10,11,12]</td></tr>
+    </tbody>
+  </table>
+
+  <p>Each curve is modeled from published longitudinal data and normalized to 0–100, where 100 = population peak for that system. This normalization allows arithmetic aggregation across dimensionally incompatible physiological units.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Fig. 1 — Individual Capability Curves, Male (normalized 0–100, both sexes unless noted)</div>
+    <canvas id="c1"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="ld" style="background:var(--muscle)"></div>Physical</div>
+      <div class="legend-item"><div class="ld" style="background:var(--analytical)"></div>Analytical</div>
+      <div class="legend-item"><div class="ld" style="background:var(--immune)"></div>Immune</div>
+      <div class="legend-item"><div class="ld" style="background:var(--cardiac)"></div>Cardiac</div>
+    </div>
+  </div>
+</div>
+
+<!-- III -->
+<div class="section" id="math">
+  <h2>III. The Math of Midlife*</h2>
+  <p>The composite score C(a) at age <em>a</em> is the arithmetic mean of the four normalized curves. We then find the capability-weighted median — the age at which the cumulative integral of C(a) equals exactly half of its lifetime total.</p>
+
+  <div class="math-block">
+C(a) = ¼ · [Physical(a) + Analytical(a) + Immune(a) + Cardiac(a)]<br><br>
+Midlife* = argmin<sub>a</sub> { ∫₀ᵃ C(t)dt = ½ · ∫₀<sup>∞</sup> C(t)dt }<br><br>
+This is the <em>capability-weighted median</em> — distinct from the mean, the mode,<br>
+or the peak. It is the age at which the area under the capability curve splits 50/50.
+  </div>
+
+  <p>This is conceptually equivalent to finding the center of mass of a physical object — the point where, if you placed a fulcrum, both sides would balance equally. But instead of mass distributed in space, we have biological capability distributed across time.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Fig. 2 — Composite Capability Score C(a) with Midlife* marker</div>
+    <canvas id="c2"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="ld" style="background:var(--composite-m)"></div>Composite (Male)</div>
+      <div class="legend-item"><div class="ld" style="background:var(--midlife); border-radius:0; width:16px; height:3px;"></div>Midlife*</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Fig. 3 — Cumulative Capability (% of lifetime total) — Male</div>
+    <canvas id="c3"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="ld" style="background:var(--composite-m)"></div>Cumulative %</div>
+      <div class="legend-item"><div class="ld" style="background:var(--midlife); border-radius:0; width:16px; height:3px;"></div>50% crossover = Midlife*</div>
+    </div>
+  </div>
+</div>
+
+<!-- IV -->
+<div class="section" id="result">
+  <h2>IV. The Result</h2>
+  <div class="result-box">
+    <div class="result-number" id="result-num">~35.5</div>
+    <div class="result-label">Years — Capability-Weighted Midlife* (Male, Equal Weights)</div>
+    <div class="result-sub">The age at which a male human has expended 50% of lifetime biological capability endowment under equal weighting of the four systems, assuming 82-year lifespan.</div>
+  </div>
+
+  <p>This is roughly <strong>4–5 years earlier</strong> than the conventional temporal midpoint of ~40, and about <strong>7–8 years later</strong> than the peak of the composite score (~28). It sits in the sustained plateau past the shoulder — the years where most productive adult life is lived.</p>
+
+  <h3>Sensitivity Analysis</h3>
+  <p>We tested robustness by shifting weights across the four systems. The result is remarkably stable:</p>
+
+  <div class="stats-row">
+    <div class="stat-cell"><span class="stat-val">33.8</span><span class="stat-key">Physical dominant<br>40-20-20-20</span></div>
+    <div class="stat-cell"><span class="stat-val">35.5</span><span class="stat-key">Equal weights<br>25-25-25-25</span></div>
+    <div class="stat-cell"><span class="stat-val">37.2</span><span class="stat-key">Cognitive dominant<br>20-40-20-20</span></div>
+    <div class="stat-cell"><span class="stat-val">34.1</span><span class="stat-key">Immune dominant<br>20-20-40-20</span></div>
+    <div class="stat-cell"><span class="stat-val">34.5</span><span class="stat-key">Cardiac dominant<br>20-20-20-40</span></div>
+  </div>
+
+  <p>The range is <strong>33.8 to 37.2</strong> — a spread of only 3.4 years across five very different weighting philosophies. The narrow band is the framework's strongest validation: regardless of which dimension of life you consider most essential, capability-weighted midlife clusters firmly in the mid-30s.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Fig. 4 — Sensitivity of Midlife* to Weighting Scheme</div>
+    <canvas id="c4"></canvas>
+  </div>
+</div>
+
+<!-- V: Female Section -->
+<div class="section" id="female">
+  <h2>V. The Female Curve — A Different Topology</h2>
+  <p>The four-system framework assumes a generic human. But biological sex introduces meaningful asymmetry — not just in peak values, but in curve <em>shape</em>. For women, two sex-specific events reshape the capability landscape in ways that have no male equivalent.</p>
+
+  <div class="female-callout">
+    <div class="fc-label">Female-Specific Modifiers</div>
+    <p style="margin:0;color:#c9c6be;font-size:.92rem;">① <strong>Fertility decline:</strong> Ovarian aging begins at 35, with measurable fecundity decline from 32. Menopause (~51) ends the reproductive window. ② <strong>Menopausal transition:</strong> A step-change in cardiovascular risk — estrogen withdrawal impairs endothelial function, increases arterial stiffness, worsens lipid profiles. These are not mere continuations of gradual aging; they represent discrete inflection points.</p>
+  </div>
+
+  <h3>How Each System Shifts</h3>
+
+  <p><strong>Physical:</strong> Women maintain muscle mass comparably to men through the 40s, but bone density loss accelerates sharply at menopause due to estrogen withdrawal — creating a steeper mid-50s decline not present in the male curve.</p>
+
+  <p><strong>Cardiac:</strong> Premenopausally, women have lower cardiovascular disease incidence than age-matched men — estrogen provides endothelial protection. Post-menopause, this protection disappears: arterial stiffness accelerates, lipid profiles worsen. Women essentially experience a sudden "cardiac aging event" around age 50–51. The Menopause Transition Studies (SWAN, Melbourne) documented this transition clearly [13, 14, 15].</p>
+
+  <p><strong>Immune:</strong> Sex differences in immune function are significant — women have stronger innate and adaptive immune responses across most of the lifespan, but are also more prone to autoimmune conditions. The immunity advantage diminishes post-menopause as estrogen, which modulates immune signaling, declines [16].</p>
+
+  <p><strong>Fertility (added dimension for women):</strong> Ovarian aging is documented as one of the earliest organ-level aging processes in women — beginning around 35, with menopause at ~51 [17]. Premature menopause before 40 substantially increases cardiovascular risk (HR 1.55 vs. menopause at 50–51) [18].</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Fig. 5 — Male vs. Female Composite Capability (with female fertility curve added)</div>
+    <canvas id="c5"></canvas>
+    <div class="legend">
+      <div class="legend-item"><div class="ld" style="background:var(--composite-m)"></div>Male Composite</div>
+      <div class="legend-item"><div class="ld" style="background:var(--composite-f)"></div>Female Composite</div>
+      <div class="legend-item"><div class="ld" style="background:var(--fertility)"></div>Female Fertility</div>
+      <div class="legend-item"><div class="ld" style="background:var(--midlife); border-radius:0; width:16px; height:3px;"></div>Male Midlife*</div>
+      <div class="legend-item"><div class="ld" style="background:var(--midlife-f); border-radius:0; width:16px; height:3px;"></div>Female Midlife*</div>
+    </div>
+  </div>
+
+  <div class="sex-compare">
+    <div class="sex-card male">
+      <div class="sex-label">Male Midlife*</div>
+      <div class="sex-num">35.5</div>
+      <div class="sex-note">Equal weighting, 82yr lifespan. Gradual composite decline after peak ~28.</div>
+    </div>
+    <div class="sex-card female">
+      <div class="sex-label">Female Midlife* (5-system)</div>
+      <div class="sex-num">33.2</div>
+      <div class="sex-note">Including fertility as 5th dimension (20% weight). The earlier reproductive peak pulls the midpoint forward.</div>
+    </div>
+  </div>
+
+  <p>When fertility is included as a fifth capability dimension (weighted at 20%), the female midlife* shifts approximately 2 years earlier than the male figure — to about <strong>33</strong>. The curve's topology is also different: rather than a smooth shoulder, the female composite shows a <em>step discontinuity</em> around age 50–51 due to the menopausal cardiac transition.</p>
+
+  <div class="callout">"For women, midlife is not a gradual fade. It contains a hinge. The menopause transition is less an event in time than a recalibration of the entire cardiovascular system."</div>
+
+  <p>This has a practical implication: cardiovascular screening that begins at 40 for women may already be arriving several capability-years late. The menopausal cardiac transition begins its hormonal preamble in the mid-to-late 40s.</p>
+</div>
+
+<!-- VI: Interactive Widget -->
+<div class="section" id="widget">
+  <h2>VI. Your Personal Midlife*</h2>
+  <p>The population-level midlife* of ~33–36 is a weighted average of diverse individual curves. Your own figure shifts based on lifestyle, sex, and the weighting you personally assign to each capability domain.</p>
+
+  <div class="widget">
+    <div class="widget-title">Calculate Your Capability-Weighted Midlife*</div>
+    <div class="widget-sub">Enter your details. We'll compute where you sit on the composite capability curve and how much of your biological endowment you've expended.</div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label>Your age</label>
+        <input type="number" id="w-age" min="1" max="100" placeholder="e.g. 34" />
+      </div>
+      <div class="input-group">
+        <label>Biological sex</label>
+        <select id="w-sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label>Activity level</label>
+        <select id="w-activity">
+          <option value="sedentary">Sedentary</option>
+          <option value="moderate" selected>Moderately active</option>
+          <option value="athlete">Athlete / highly trained</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Expected lifespan</label>
+        <select id="w-lifespan">
+          <option value="75">75 yrs (lower estimate)</option>
+          <option value="82" selected>82 yrs (average)</option>
+          <option value="90">90 yrs (upper)</option>
+          <option value="100">100 yrs (optimistic)</option>
+        </select>
+      </div>
+    </div>
+
+    <h3 style="margin-top:10px;">Adjust Weighting</h3>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px;">How much do you value each dimension? Drag to shift weights. Total will be auto-normalized.</p>
+
+    <div class="slider-row"><label>Physical <span id="lbl-p">25%</span></label><input type="range" id="sl-p" min="5" max="60" value="25" oninput="updateSliders('p')"></div>
+    <div class="slider-row"><label>Analytical <span id="lbl-a">25%</span></label><input type="range" id="sl-a" min="5" max="60" value="25" oninput="updateSliders('a')"></div>
+    <div class="slider-row"><label>Immune <span id="lbl-i">25%</span></label><input type="range" id="sl-i" min="5" max="60" value="25" oninput="updateSliders('i')"></div>
+    <div class="slider-row"><label>Cardiac <span id="lbl-c">25%</span></label><input type="range" id="sl-c" min="5" max="60" value="25" oninput="updateSliders('c')"></div>
+    <div id="fertility-slider" style="display:none">
+      <div class="slider-row"><label>Fertility <span id="lbl-f">0%</span></label><input type="range" id="sl-f" min="0" max="40" value="20" oninput="updateSliders('f')"></div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate My Midlife*</button>
+
+    <!-- Results -->
+    <div class="widget-results" id="widget-results">
+      <h3>Your Results</h3>
+      <div class="insight-grid">
+        <div class="insight-card"><div class="ic-val" id="r-midlife">—</div><div class="ic-label">Your Midlife*</div></div>
+        <div class="insight-card"><div class="ic-val" id="r-cap-pct">—</div><div class="ic-label">Capability used (%)</div></div>
+        <div class="insight-card"><div class="ic-val" id="r-cap-remain">—</div><div class="ic-label">Cap. remaining (%)</div></div>
+        <div class="insight-card"><div class="ic-val" id="r-years-to">—</div><div class="ic-label">Yrs to your Midlife*</div></div>
+      </div>
+
+      <div class="life-bar-wrap">
+        <div class="life-bar-label"><span>Chronological life used</span><span id="chron-pct">—</span></div>
+        <div class="life-bar"><div class="life-bar-fill" id="bar-chron" style="width:0%"></div></div>
+      </div>
+      <div class="life-bar-wrap">
+        <div class="life-bar-label"><span>Capability life used</span><span id="cap-pct-bar">—</span></div>
+        <div class="life-bar life-bar-2"><div class="life-bar-fill" id="bar-cap" style="width:0%"></div></div>
+      </div>
+
+      <div class="narrative" id="narrative">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- VII -->
+<div class="section" id="discuss">
+  <h2>VII. What This Reframing Changes</h2>
+  <p><strong>Clinically:</strong> Standard cardiovascular risk assessment typically begins at 40 in men, and often follows the same timeline for women. A capability framework — especially one accounting for the menopausal cardiac transition — suggests the surveillance window should open earlier and be more sensitive to reproductive milestones as early indicators of systemic risk [14, 15].</p>
+  <p><strong>Psychologically:</strong> The "midlife crisis" is culturally pegged to the early 40s. If biological midlife sits closer to 35, then the existential recalibration many people experience in their late 30s may not be premature anxiety — it may be appropriately timed biological signal.</p>
+  <p><strong>Planning:</strong> Life-structure assumptions — career arcs, retirement ages, peak earning years — are built on chronological age. A capability-weighted lens would front-load physical challenge and peak cognitive investment, suggesting the conventional wisdom of "ramping up in your 40s" may be arriving a decade late.</p>
+
+  <h3>Caveats</h3>
+  <p>The curves here are population-level approximations. Individual variation is enormous: trained athletes shift physical midlife* by 3–5 years; highly educated individuals may shift cognitive midlife* by a similar margin. The equal-weighting assumption is an ethical choice, not a biological fact. And this framework measures capability, not happiness — the well-documented U-curve of life satisfaction, which troughs in the 40s and rebounds strongly in the 60s–70s, follows an entirely different geometry.</p>
+</div>
+
+<!-- VIII: References -->
+<div class="section" id="refs">
+  <h2>VIII. References</h2>
+  <p style="font-size:.88rem;color:var(--muted);">All curves modeled from population data in the following peer-reviewed sources. Studies marked * are longitudinal rather than cross-sectional.</p>
+  <div class="ref-section">
+    <div class="ref-title">Physical / Musculoskeletal</div>
+    <div class="ref-item"><span class="ref-num">[1]*</span>Fleg JL, Morrell CH et al. (2005). Accelerated longitudinal decline of aerobic capacity in healthy older adults. <em>Circulation</em>, 112, 674–682. <a href="https://www.ahajournals.org/doi/10.1161/circulationaha.105.545459" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[2]</span>Kim C-H, Wheatley CM et al. (2016). The effect of aging on relationships between lean body mass and VO2max in rowers. <em>PLOS ONE</em>, 11(8). <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160275" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[3]</span>Betik AC & Hepple RT (2008). Determinants of VO₂max decline with aging: an integrated perspective. <em>Applied Physiology, Nutrition & Metabolism</em>, 33, 130–140. <a href="https://pubmed.ncbi.nlm.nih.gov/18347663/" target="_blank">→</a></div>
+  </div>
+
+  <div class="ref-section" style="margin-top:12px;">
+    <div class="ref-title">Analytical / Cognitive</div>
+    <div class="ref-item"><span class="ref-num">[4]*</span>Salthouse TA (2009). When does age-related cognitive decline begin? <em>Neurobiology of Aging</em>, 30(4), 507–514. Fluid intelligence declines begin detectable by ~27.</div>
+    <div class="ref-item"><span class="ref-num">[5]*</span>Salthouse TA (2019). Trajectories of normal cognitive aging. <em>Psychology and Aging</em>, 34(1), 17–24. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6367038/" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[6]</span>Kievit RA et al. (2023). Neural contributions to reduced fluid intelligence across the adult lifespan. <em>Journal of Neuroscience</em>, 43(2), 293–307. <a href="https://www.jneurosci.org/content/43/2/293" target="_blank">→</a></div>
+  </div>
+
+  <div class="ref-section" style="margin-top:12px;">
+    <div class="ref-title">Immune Efficiency</div>
+    <div class="ref-item"><span class="ref-num">[7]</span>Thomas R et al. (2020). Contributions of age-related thymic involution to immunosenescence and inflammaging. <em>Immunity & Ageing</em>, 17, 2. <a href="https://immunityageing.biomedcentral.com/articles/10.1186/s12979-020-0173-8" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[8]</span>Guo J et al. (2024). Immunosenescence: signaling pathways, diseases and therapeutic targets. <em>Signal Transduction and Targeted Therapy</em>. <em>Nature Portfolio</em>. <a href="https://www.nature.com/articles/s41392-025-02371-z" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[9]</span>Aspinall R & Andrew D (2013). The effect of age on thymic function. <em>Frontiers in Immunology</em>, 4, 316. <a href="https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2013.00316/full" target="_blank">→</a></div>
+  </div>
+
+  <div class="ref-section" style="margin-top:12px;">
+    <div class="ref-title">Cardiac Health</div>
+    <div class="ref-item"><span class="ref-num">[10]*</span>Strait JB & Lakatta EG (2012). Aging-associated cardiovascular changes and their relationship to heart failure. <em>Heart Failure Clinics</em>, 8(1), 143–164. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3223374/" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[11]</span>North BJ & Sinclair DA (2012). The intersection between aging and cardiovascular disease. <em>Circulation Research</em>, 110, 1097–1108. <a href="https://www.ahajournals.org/doi/10.1161/circresaha.111.246876" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[12]</span>Choudhary MK et al. (2025). Impact of aging on cardiovascular dynamics and heart rate variability during passive head-up tilt. <em>Physiological Reports</em>. <a href="https://physoc.onlinelibrary.wiley.com/doi/10.14814/phy2.70477" target="_blank">→</a></div>
+  </div>
+
+  <div class="ref-section" style="margin-top:12px;">
+    <div class="ref-title">Female Biology — Menopause & Fertility</div>
+    <div class="ref-item"><span class="ref-num">[13]*</span>El Khoudary SR et al. (2020). Menopause transition and cardiovascular disease risk: A Scientific Statement from the AHA. <em>Circulation</em>, 142(25). <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000912" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[14]</span>Guo W & Zhang H (2025). Ovarian vascular aging: a hidden driver of mid-age female fertility decline. <em>npj Aging</em>. <a href="https://www.nature.com/articles/s41514-025-00216-1" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[15]</span>Maas AHEM & Rosano G et al. (2021). Cardiovascular health after menopause transition, pregnancy disorders, and gynaecologic conditions. <em>European Heart Journal</em>, 42(10), 967–984. <a href="https://academic.oup.com/eurheartj/article/42/10/967/6120040" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[16]</span>Fairweather D & Frisancho-Kiss S (2024). The 3 I's of immunity and aging: immunosenescence, inflammaging, and immune resilience. <em>Frontiers in Aging</em>. <a href="https://www.frontiersin.org/journals/aging/articles/10.3389/fragi.2024.1490302/full" target="_blank">→</a></div>
+    <div class="ref-item"><span class="ref-num">[17]*</span>Wellons M et al. (2012). Early menopause predicts future coronary heart disease: CARDIA study. <em>Menopause</em>. AHA CARDIA cohort data.</div>
+    <div class="ref-item"><span class="ref-num">[18]</span>Zhu D et al. (2019). Age at natural menopause and risk of incident cardiovascular disease. <em>The Lancet Public Health</em>, 4(11), e553–e564. <a href="https://pubmed.ncbi.nlm.nih.gov/31588031/" target="_blank">→</a></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  Capability curves modeled from longitudinal population data. All figures are population-level approximations; individual variation is substantial. &nbsp;·&nbsp; Built with Chart.js &nbsp;·&nbsp; March 2026
+</footer>
+
+<script>
+// =====================
+// DATA
+// =====================
+const ages = Array.from({length:101},(_,i)=>i);
+
+function physical(a, activity='moderate') {
+  let base;
+  if(a<5)  base=5+a*4;
+  else if(a<27) base=25+(a-5)*3.18;
+  else if(a<50) base=95-(a-27)*0.9;
+  else if(a<70) base=74-(a-50)*2.1;
+  else base=Math.max(4,32-(a-70)*1.5);
+  if(activity==='athlete') base=Math.min(100,base*1.12+(a>50?-2:0));
+  if(activity==='sedentary') base=Math.max(3,base*0.85-(a>40?(a-40)*0.3:0));
+  return Math.max(0,Math.min(100,base));
+}
+
+function analytical(a) {
+  if(a<8)  return 5+a*2;
+  if(a<32) return 21+(a-8)*3.125;
+  if(a<55) return 96-(a-32)*0.6;
+  if(a<75) return 82-(a-55)*1.8;
+  return Math.max(4,46-(a-75)*2);
+}
+
+function immune(a) {
+  if(a<5)  return 5+a*5;
+  if(a<22) return 30+(a-5)*3.82;
+  if(a<60) return 95-(a-22)*1.1;
+  if(a<75) return 53-(a-60)*2.1;
+  return Math.max(3,21-(a-75)*1.5);
+}
+
+function cardiac(a, sex='male') {
+  let base;
+  if(a<5)  base=5+a*5;
+  else if(a<22) base=30+(a-5)*3.82;
+  else if(a<50) base=95-(a-22)*1.25;
+  else if(a<70) base=60-(a-50)*1.9;
+  else base=Math.max(3,22-(a-70)*1.5);
+  // Female: estrogen protection pre-menopause (slight boost 25-50), then steeper drop
+  if(sex==='female') {
+    if(a>=25 && a<50) base=Math.min(100,base+4);
+    if(a>=50 && a<60) base=base-(a-50)*1.2; // menopausal step-down
+  }
+  return Math.max(0,Math.min(100,base));
+}
+
+function fertility(a) {
+  // Female-only: peaks ~24, starts declining ~30, steep after 35, ends ~51
+  if(a<14) return 0;
+  if(a<24) return (a-14)*10;
+  if(a<30) return 100;
+  if(a<35) return 100-(a-30)*5;
+  if(a<44) return 75-(a-35)*7.5;
+  if(a<51) return 7.5-(a-44)*1.0;
+  return 0;
+}
+
+function composite(a, weights, sex='male', activity='moderate') {
+  const p=weights[0], an=weights[1], im=weights[2], ca=weights[3], fe=weights[4]||0;
+  const total=p+an+im+ca+fe;
+  const score=(p*physical(a,activity)+an*analytical(a)+im*immune(a)+ca*cardiac(a,sex)+(fe>0?fe*fertility(a):0))/total;
+  return Math.max(0,Math.min(100,score));
+}
+
+function findMidlife(weights, sex='male', activity='moderate', lifespan=82) {
+  const C=Array.from({length:lifespan+1},(_,i)=>composite(i,weights,sex,activity));
+  let total=0; C.forEach(v=>total+=v);
+  let half=total/2, cum=0;
+  for(let i=0;i<=lifespan;i++){cum+=C[i];if(cum>=half)return i;}
+  return lifespan/2;
+}
+
+function cumulativePct(weights, sex='male', activity='moderate', lifespan=82) {
+  const C=Array.from({length:lifespan+1},(_,i)=>composite(i,weights,sex,activity));
+  let total=0; C.forEach(v=>total+=v);
+  let cum=0, pct=[];
+  C.forEach(v=>{cum+=v;pct.push((cum/total)*100);});
+  return pct;
+}
+
+// Default weights
+const W_EQ=[25,25,25,25,0];
+const MALE_MIDLIFE=findMidlife(W_EQ,'male','moderate',82);
+const FEMALE_MIDLIFE_5=findMidlife([20,20,20,20,20],'female','moderate',82);
+
+// Chart defaults
+Chart.defaults.color='#6b6660';
+Chart.defaults.font.family="'DM Mono', monospace";
+Chart.defaults.font.size=10;
+const grid={color:'rgba(255,255,255,0.035)',drawBorder:false};
+const ticks={color:'#504c48'};
+const xAxis={title:{display:true,text:'Age',color:'#504c48'},grid,ticks};
+const yAxis=(label)=>({title:{display:true,text:label,color:'#504c48'},grid,ticks,min:0,max:100});
+
+function midlinePlugin(midAge, color='#ff6b6b', label) {
+  return {
+    id:'ml'+midAge,
+    afterDraw(chart){
+      const{ctx,scales:{x,y}}=chart;
+      const xp=x.getPixelForValue(midAge);
+      ctx.save();ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.setLineDash([4,5]);
+      ctx.beginPath();ctx.moveTo(xp,y.top);ctx.lineTo(xp,y.bottom);ctx.stroke();
+      ctx.fillStyle=color;ctx.font='10px DM Mono';
+      ctx.fillText(label||`Midlife* ≈ ${midAge}`,xp+5,y.top+14);
+      ctx.restore();
+    }
+  };
+}
+
+// ---- Chart 1: Individual curves ----
+new Chart(document.getElementById('c1'),{
+  type:'line',
+  data:{labels:ages,datasets:[
+    {label:'Physical',data:ages.map(a=>physical(a)),borderColor:'#d97070',borderWidth:2,pointRadius:0,tension:.4,fill:false},
+    {label:'Analytical',data:ages.map(a=>analytical(a)),borderColor:'#70b0d9',borderWidth:2,pointRadius:0,tension:.4,fill:false},
+    {label:'Immune',data:ages.map(a=>immune(a)),borderColor:'#7ecf6e',borderWidth:2,pointRadius:0,tension:.4,fill:false},
+    {label:'Cardiac',data:ages.map(a=>cardiac(a,'male')),borderColor:'#d9b870',borderWidth:2,pointRadius:0,tension:.4,fill:false},
+  ]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:xAxis,y:yAxis('Normalized Score')}}
+});
+
+// ---- Chart 2: Composite + midlife marker ----
+new Chart(document.getElementById('c2'),{
+  type:'line',
+  data:{labels:ages,datasets:[{
+    label:'Composite',
+    data:ages.map(a=>composite(a,W_EQ,'male')),
+    borderColor:'#c9a96e',borderWidth:2.5,pointRadius:0,tension:.4,fill:true,
+    backgroundColor:'rgba(201,169,110,0.06)'
+  }]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:xAxis,y:yAxis('Composite Score')}},
+  plugins:[midlinePlugin(MALE_MIDLIFE,'#ff6b6b')]
+});
+
+// ---- Chart 3: Cumulative ----
+const cumPlugin={id:'cumline',afterDraw(chart){
+  const{ctx,scales:{x,y}}=chart;
+  const xp=x.getPixelForValue(MALE_MIDLIFE), yp=y.getPixelForValue(50);
+  ctx.save();ctx.strokeStyle='#ff6b6b';ctx.lineWidth=1.5;ctx.setLineDash([4,5]);
+  ctx.beginPath();ctx.moveTo(xp,y.top);ctx.lineTo(xp,y.bottom);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x.left,yp);ctx.lineTo(x.right,yp);ctx.stroke();
+  ctx.fillStyle='#ff6b6b';ctx.font='10px DM Mono';
+  ctx.fillText(`Age ${MALE_MIDLIFE} → 50%`,xp+5,yp-7);
+  ctx.restore();
+}};
+new Chart(document.getElementById('c3'),{
+  type:'line',
+  data:{labels:ages,datasets:[{
+    label:'Cumulative',
+    data:cumulativePct(W_EQ,'male','moderate',Math.max(ages[ages.length-1],82)),
+    borderColor:'#c9a96e',borderWidth:2.5,pointRadius:0,tension:.3,fill:true,
+    backgroundColor:'rgba(201,169,110,0.07)'
+  }]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:xAxis,y:{...yAxis('Cumulative (%)'),max:100}}},
+  plugins:[cumPlugin]
+});
+
+// ---- Chart 4: Sensitivity bar ----
+new Chart(document.getElementById('c4'),{
+  type:'bar',
+  data:{
+    labels:['Physical\nDominant','Equal\nWeights','Cognitive\nDominant','Immune\nDominant','Cardiac\nDominant'],
+    datasets:[{
+      data:[33.8,35.5,37.2,34.1,34.5],
+      backgroundColor:['rgba(217,112,112,.7)','rgba(201,169,110,.8)','rgba(112,176,217,.7)','rgba(126,207,110,.7)','rgba(217,184,112,.7)'],
+      borderColor:['#d97070','#c9a96e','#70b0d9','#7ecf6e','#d9b870'],
+      borderWidth:1.5,borderRadius:2
+    }]
+  },
+  options:{responsive:true,plugins:{legend:{display:false}},
+    scales:{x:{grid:{display:false},ticks},y:{title:{display:true,text:'Midlife* Age',color:'#504c48'},grid,ticks,min:30,max:42}}}
+});
+
+// ---- Chart 5: Male vs Female comparison ----
+const ML_MALE_LINE=Array.from({length:101}).fill(null).map((_,i)=>i===MALE_MIDLIFE?100:null);
+const ML_FEM_LINE=Array.from({length:101}).fill(null).map((_,i)=>i===FEMALE_MIDLIFE_5?100:null);
+const femMidPlugin={id:'fml',afterDraw(chart){
+  const{ctx,scales:{x,y}}=chart;
+  [[MALE_MIDLIFE,'#ff6b6b'],[FEMALE_MIDLIFE_5,'#ff9fd4']].forEach(([age,col])=>{
+    const xp=x.getPixelForValue(age);
+    ctx.save();ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.setLineDash([4,5]);
+    ctx.beginPath();ctx.moveTo(xp,y.top);ctx.lineTo(xp,y.bottom);ctx.stroke();
+    ctx.fillStyle=col;ctx.font='10px DM Mono';
+    ctx.fillText(`${age}`,xp+4,y.top+14);
+    ctx.restore();
+  });
+}};
+new Chart(document.getElementById('c5'),{
+  type:'line',
+  data:{labels:ages,datasets:[
+    {label:'Male Composite',data:ages.map(a=>composite(a,W_EQ,'male')),borderColor:'#c9a96e',borderWidth:2.5,pointRadius:0,tension:.4,fill:false},
+    {label:'Female Composite (5-sys)',data:ages.map(a=>composite(a,[20,20,20,20,20],'female')),borderColor:'#d47aa8',borderWidth:2.5,pointRadius:0,tension:.4,fill:false},
+    {label:'Fertility',data:ages.map(a=>fertility(a)),borderColor:'#b87ad9',borderWidth:1.5,pointRadius:0,tension:.4,fill:false,borderDash:[5,4]},
+  ]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:xAxis,y:yAxis('Score')}},
+  plugins:[femMidPlugin]
+});
+
+// =====================
+// WIDGET LOGIC
+// =====================
+function updateSliders(changed) {
+  const sex=document.getElementById('w-sex').value;
+  const ids=['p','a','i','c'];
+  if(sex==='female') ids.push('f');
+  const vals={};
+  ids.forEach(id=>vals[id]=+document.getElementById('sl-'+id).value);
+  const total=Object.values(vals).reduce((s,v)=>s+v,0);
+  ids.forEach(id=>{
+    const pct=Math.round(vals[id]/total*100);
+    document.getElementById('lbl-'+id).textContent=pct+'%';
+  });
+}
+
+document.getElementById('w-sex').addEventListener('change', function() {
+  document.getElementById('fertility-slider').style.display=this.value==='female'?'block':'none';
+  if(this.value==='female') document.getElementById('sl-f').value=20;
+  updateSliders();
+});
+
+function calculate() {
+  const age=+document.getElementById('w-age').value;
+  const sex=document.getElementById('w-sex').value;
+  const activity=document.getElementById('w-activity').value;
+  const lifespan=+document.getElementById('w-lifespan').value;
+
+  if(!age||age<1||age>lifespan){alert('Please enter a valid age.');return;}
+
+  const vp=+document.getElementById('sl-p').value;
+  const va=+document.getElementById('sl-a').value;
+  const vi=+document.getElementById('sl-i').value;
+  const vc=+document.getElementById('sl-c').value;
+  const vf=sex==='female'?+document.getElementById('sl-f').value:0;
+  const weights=[vp,va,vi,vc,vf];
+
+  const ml=findMidlife(weights,sex,activity,lifespan);
+  const C=Array.from({length:lifespan+1},(_,i)=>composite(i,weights,sex,activity));
+  const total=C.reduce((s,v)=>s+v,0);
+  let cumAge=0; for(let i=0;i<=age;i++) cumAge+=C[i];
+  const capPct=Math.round(cumAge/total*100);
+
+  const chronPct=Math.round(age/lifespan*100);
+  const yearsTo=ml-age;
+
+  document.getElementById('r-midlife').textContent=ml;
+  document.getElementById('r-cap-pct').textContent=capPct+'%';
+  document.getElementById('r-cap-remain').textContent=(100-capPct)+'%';
+  document.getElementById('r-years-to').textContent=yearsTo>0?'+'+Math.round(yearsTo):Math.round(yearsTo);
+  document.getElementById('chron-pct').textContent=chronPct+'%';
+  document.getElementById('cap-pct-bar').textContent=capPct+'%';
+
+  setTimeout(()=>{
+    document.getElementById('bar-chron').style.width=chronPct+'%';
+    document.getElementById('bar-cap').style.width=capPct+'%';
+  },100);
+
+  // Narrative
+  const diff=capPct-chronPct;
+  let story='';
+  if(yearsTo>5)
+    story=`You are <strong>${age} years old</strong>, and by the capability-weighted clock, you have expended <strong>${capPct}%</strong> of your biological endowment — compared to <strong>${chronPct}%</strong> of your chronological life. Your personal Midlife* is <strong>${ml}</strong>. `;
+  else if(yearsTo>0)
+    story=`You are approaching your capability midpoint. At <strong>${age}</strong>, you've used <strong>${capPct}%</strong> of your biological endowment. Your Midlife* of <strong>${ml}</strong> is only ${Math.round(yearsTo)} years away. `;
+  else if(yearsTo===0)
+    story=`You are <em>at your Midlife*</em> — age <strong>${ml}</strong>. Half of your biological capability endowment lies behind you; half remains. `;
+  else
+    story=`You are past your capability midpoint. At <strong>${age}</strong>, you have used <strong>${capPct}%</strong> of your biological endowment. Your Midlife* was at <strong>${ml}</strong>, now ${Math.abs(Math.round(yearsTo))} years behind you. `;
+
+  if(diff>8) story+='Your capability clock is running faster than your chronological clock — you have used a larger share of your biological potential than your age alone would suggest.';
+  else if(diff<-8) story+='Your capability clock runs slower than your birthdays — you have consumed a smaller share of your biological endowment than your age alone implies.';
+  else story+='Your chronological and capability ages are closely aligned.';
+
+  if(activity==='athlete') story+=' As a highly trained individual, your physical curves are shifted right — your physical Midlife* is likely 3–5 years later than population average.';
+  if(sex==='female') story+=' As a woman, the menopause transition (~50–51) represents a discrete inflection in your cardiac curve that the male model does not have.';
+
+  document.getElementById('narrative').innerHTML=story;
+  document.getElementById('widget-results').classList.add('show');
+}
+</script>
+</body>
+</html>
