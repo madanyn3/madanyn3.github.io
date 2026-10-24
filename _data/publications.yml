@@ -1,0 +1,48 @@
+# Rendered on /publications/, grouped by `type` in the order of the
+# `publication_types` list in publications.md. Newest first within a group.
+#
+# Template for a new entry (e.g. a preprint):
+#
+# - type: preprint
+#   title: "Title of the preprint"
+#   authors: ["Madan Y N"]
+#   venue: "arXiv preprint"
+#   year: 2027
+#   note: ""                   # optional, e.g. an award
+#   image: /assets/images/...  # optional thumbnail
+#   image_url: /assets/...     # where the thumbnail links to
+#   abstract: >-
+#     One-paragraph summary.
+#   links:
+#     - label: arXiv
+#       url: https://arxiv.org/abs/XXXX.XXXXX
+#     - label: Code
+#       url: https://github.com/madanyn3/...
+
+- type: poster
+  title: "Modeling Performance of Transformers on FPGA"
+  authors: ["Madan Y N", "Ashwin Krishnan", "Manoj Nambiar"]
+  venue: >-
+    Student Research Symposium, 30th IEEE International Conference on High
+    Performance Computing, Data, and Analytics (HiPC 2023), Goa, India
+  year: 2023
+  note: Best Poster Award
+  image: /assets/images/hipc2023-poster-thumb.jpg
+  image_url: /assets/papers/hipc2023-transformers-fpga-poster.pdf
+  abstract: >-
+    With GPT-2 as the reference model, a modeling technique that finds a
+    deployment strategy for a given FPGA board without building it, enabling
+    quick comparison with CPUs and GPUs. Two designs are modeled: a
+    model-agnostic one that schedules shared matrix-multiply, softmax and
+    norm units, and a GPT-2-specific, end-to-end pipelined one. Latency
+    expressions for each drive a genetic-algorithm search over resource
+    partitionings. At Xilinx Alveo U280 resources and 100 MHz, the models
+    estimate 21× (model-agnostic) and 119× (model-specific) lower inference
+    latency than a measured dual-core i5 CPU. Work done at TCS Research.
+  links:
+    - label: Paper (PDF)
+      url: /assets/papers/hipc2023-transformers-fpga.pdf
+    - label: Poster (PDF)
+      url: /assets/papers/hipc2023-transformers-fpga-poster.pdf
+    - label: Project notes
+      url: /projects/#transformers-fpga

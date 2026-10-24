@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+
+    <nav class="site-nav" aria-label="Main">
+      {% for item in site.data.navigation %}
+        {% if item.url == "/" %}
+          {% if page.url == "/" %}{% assign active = true %}{% else %}{% assign active = false %}{% endif %}
+        {% else %}
+          {% assign active = page.url | slice: 0, item.url.size %}
+          {% if active == item.url %}{% assign active = true %}{% else %}{% assign active = false %}{% endif %}
+        {% endif %}
+        <a href="{{ item.url | relative_url }}"{% if active %} class="active" aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M1.5 12h3M19.5 12h3M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>

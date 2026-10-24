@@ -1,0 +1,169 @@
+---
+layout: page
+title: Curriculum Vitae
+permalink: /cv/
+description: Curriculum vitae of Madan Y N.
+---
+
+<p class="cv-actions">
+  <a class="button" href="{{ site.cv_pdf | relative_url }}" target="_blank" rel="noopener">Download PDF</a>
+  <span class="cv-updated">Last updated October 2026</span>
+</p>
+
+<section class="cv-section">
+  <h2>Education</h2>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">IIT Bombay</span>
+      <span class="cv-entry-date">Nov 2020 – May 2024</span>
+    </div>
+    <p class="cv-entry-sub">B.Tech (Honours) in Electrical Engineering, with a minor in Computer Science and Engineering</p>
+    <ul>
+      <li>GPA: 8.71/10</li>
+      <li>Semester GPA in the final two years: 9.15, 9.17, 9.83, 10.00</li>
+    </ul>
+    <h3 class="cv-subhead">Relevant coursework</h3>
+    <dl class="cv-skills cv-courses">
+      <dt>Mathematics</dt>
+      <dd>Calculus I &amp; II, Linear Algebra, Differential Equations I &amp; II, Complex Analysis, Probability and Random Processes, Mathematical Structures for Control<span class="pg" title="Postgraduate-level course">PG</span>, Discrete Structures</dd>
+      <dt>Computer science</dt>
+      <dd>Computer Programming and Utilization, Data Structures and Algorithms, Design and Analysis of Algorithms, Advanced Computer Architecture<span class="pg" title="Postgraduate-level course">PG</span>, Computer Networks, Embedded Systems<span class="pg" title="Postgraduate-level course">PG</span>, Principles of Data and System Security<span class="pg" title="Postgraduate-level course">PG</span>, Introduction to Machine Learning<span class="pg" title="Postgraduate-level course">PG</span>, Advanced Topics in Machine Learning<span class="pg" title="Postgraduate-level course">PG</span></dd>
+      <dt>Electronics &amp; system design</dt>
+      <dd>Digital Systems, Microprocessors, Algorithmic Design of Digital Systems<span class="pg" title="Postgraduate-level course">PG</span>, VLSI Design<span class="pg" title="Postgraduate-level course">PG</span> and VLSI Design Lab<span class="pg" title="Postgraduate-level course">PG</span>, Testing and Verification of VLSI Circuits<span class="pg" title="Postgraduate-level course">PG</span>, Analog Circuits, Electronic Devices and Circuits, Electronic Design Lab, Signal Processing, Control Systems, Communication Systems, Image Processing<span class="pg" title="Postgraduate-level course">PG</span></dd>
+    </dl>
+    <p class="cv-note"><span class="pg">PG</span> postgraduate-level course (numbered 600 and above at IIT Bombay), taken as an undergraduate elective.</p>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2>Work experience</h2>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">Silicon Design Engineer II, AMD</span>
+      <span class="cv-entry-date">Jul 2024 – present</span>
+    </div>
+    <p class="cv-entry-sub">Server CPU Performance Modeling Group, Bengaluru</p>
+    <ul>
+      <li>Model and analyze new cache-hierarchy features in AMD's internal cycle-accurate simulator, performing bottleneck analysis and design-space exploration.</li>
+      <li>Modeled the switch connecting cores to the data fabric, reducing absolute bandwidth error against the RTL model from about 15% to 1.64% under directed stress testing.</li>
+      <li>Own and maintain the infrastructure for heterogeneous multi-core simulation on a compute cluster, enabling studies that mix different core architectures; used by 3+ performance teams across AMD.</li>
+      <li>Explored reinforcement-learning-based scheduling (Q-learning) to improve L2 cache bandwidth utilization, achieving about 1% geomean bandwidth gain over a production-tuned baseline scheduler across SPEC CPU workloads; findings informed next-generation scheduler design.</li>
+      <li>Implemented a detailed asynchronous interface model enabling simulation of two modules at different clock frequencies; identified new downstream bottlenecks and recommended queue-size tunings.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2>Research experience</h2>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">Analysis of Contemporary ISA Architectures, IIT Bombay</span>
+      <span class="cv-entry-date">Jun 2024</span>
+    </div>
+    <p class="cv-entry-sub">Advisors: Sunil Shenoy (VP Emeritus, Intel) and Prof. Laxmeesha Somappa</p>
+    <ul>
+      <li>Quantified the role of the ISA in microarchitecture performance on SPEC 2017 workloads using gem5.</li>
+      <li>Modeled the Intel Golden Cove P-core microarchitecture from reverse-engineering documents.</li>
+      <li>Identified gem5 modeling limitations and explored approximations to bridge the gap.</li>
+    </ul>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">Modeling Performance of Transformers on FPGA, TCS Research</span>
+      <span class="cv-entry-date">Jul 2023</span>
+    </div>
+    <p class="cv-entry-sub">Best Poster Award, IEEE HiPC Student Research Symposium (Dec 2023)</p>
+    <ul>
+      <li>Developed two low-latency pipelined architectures and formulated latency expressions for GPT-2 inference.</li>
+      <li>Conducted design-space exploration using a genetic algorithm to determine efficient resource partitioning.</li>
+      <li>Estimated 21× and 119× speedups over a dual-core i5 CPU baseline using performance models constrained by Alveo U280 resources.</li>
+    </ul>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">Clock-Gating in Low-Power Microcontrollers, R&amp;D Project, IIT Bombay</span>
+      <span class="cv-entry-date">May 2024</span>
+    </div>
+    <p class="cv-entry-sub">Advisor: Prof. Madhav Desai</p>
+    <ul>
+      <li>Evaluated the power reduction from clock-gating a multi-cycle, non-pipelined RISC-V microcontroller.</li>
+      <li>Emulated an RV32I microarchitecture in Python, generated VHDL with the AHIR LLVM-to-HDL toolchain, verified functional correctness, enabled clock-gating and synthesized the design.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2>Projects</h2>
+  <p class="cv-note">Details and code on the <a href="{{ '/projects/' | relative_url }}">projects page</a>.</p>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title"><a href="{{ '/projects/#cardiac-redundancy' | relative_url }}">Cardiac Redundancy: Auxiliary Pump Design Study</a></span>
+      <span class="cv-entry-date">Jun 2026 – present</span>
+    </div>
+    <p>Whether a hypothetical auxiliary heart could sustain critical-organ oxygen delivery after native cardiac arrest, studied by extending the Smith et al. 0D two-ventricle model with per-organ circulation, oxygen transport and glucose–glycogen accounting.</p>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title"><a href="{{ '/projects/#edge-ml-simulator' | relative_url }}">Analytical Edge-ML Performance Simulator</a></span>
+      <span class="cv-entry-date">Sep 2026 – present</span>
+    </div>
+    <p>A C++20 performance simulator for quantized neural-network kernels, with analytical cache-hierarchy and memory-service models.</p>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title"><a href="{{ '/projects/#tile-aware-kernels' | relative_url }}">Tile-Aware Kernel Optimization</a></span>
+      <span class="cv-entry-date">Jan 2026</span>
+    </div>
+    <p>OpenCL tiled GEMM and streaming-softmax kernels for transformer attention, benchmarked over 48 problem shapes against PyTorch references.</p>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2>Publications</h2>
+  <ul>
+    <li><strong>Madan Y N</strong>, Ashwin Krishnan, Manoj Nambiar. "<a href="{{ '/assets/papers/hipc2023-transformers-fpga.pdf' | relative_url }}">Modeling Performance of Transformers on FPGA</a>." Poster, Student Research Symposium, IEEE HiPC 2023. <em>Best Poster Award.</em></li>
+  </ul>
+</section>
+
+<section class="cv-section">
+  <h2>Technical skills</h2>
+  <dl class="cv-skills">
+    <dt>Languages</dt><dd>C++, Python, C, Bash, VHDL, Verilog, x86 Assembly</dd>
+    <dt>Parallel &amp; ML frameworks</dt><dd>OpenCL, PyTorch, TensorFlow, ONNX Runtime</dd>
+    <dt>Simulation &amp; tools</dt><dd>gem5, cycle-accurate performance simulators, Git, Linux</dd>
+    <dt>Scientific Python</dt><dd>NumPy, Pandas, Matplotlib, OpenCV</dd>
+  </dl>
+</section>
+
+<section class="cv-section">
+  <h2>Selected writing</h2>
+  <ul>
+    <li><a href="https://medium.com/@myn.create/why-apple-silicon-is-better-7d6628aa0c3e" target="_blank" rel="noopener noreferrer">Why Apple Silicon is Better</a> (Jan 2025): Apple M1 and Intel Golden Cove compared on cache hierarchy, instruction fetch, decoding and memory ordering.</li>
+    <li><a href="https://medium.com/@myn.create/life-in-disequilibrium-a9524f2e7fee" target="_blank" rel="noopener noreferrer">Life in Disequilibrium</a> (Nov 2025): a science essay on cellular bioenergetics and metabolism, drawing on Nick Lane's <em>The Vital Question</em> and <em>Transformer</em>.</li>
+  </ul>
+</section>
+
+<section class="cv-section">
+  <h2>Awards &amp; honours</h2>
+  <ul>
+    <li>Best Poster Award, IEEE HiPC Student Research Symposium (Dec 2023)</li>
+    <li>JEE Main 2020: 99.64 percentile (0.92 million candidates); JEE Advanced 2020: 96.48 percentile (0.16 million candidates)</li>
+    <li>Qualified for the Kishore Vaigyanik Protsahan Yojana (KVPY-SA and KVPY-SX) fellowship (2018 and 2019)</li>
+  </ul>
+</section>
+
+<section class="cv-section">
+  <h2>Leadership</h2>
+  <div class="cv-entry">
+    <div class="cv-entry-head">
+      <span class="cv-entry-title">Team Leader, ExoFly IIT Bombay</span>
+      <span class="cv-entry-date">May 2023 – Apr 2024</span>
+    </div>
+    <p class="cv-entry-sub">Student team building a manned VTOL aerial vehicle with a 90 kg payload capacity</p>
+    <ul>
+      <li>Led a team of 30+ members building a safe and compact manned VTOL vehicle.</li>
+      <li>Secured and managed annual funding of INR 1.4 million for the first iteration of the vehicle.</li>
+      <li>Represented IIT Bombay at the UAS Challenge (Institution of Mechanical Engineers) and won the fastest-time-to-build drone category.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+# Top navigation, in display order
+- title: About
+  url: /
+- title: Projects
+  url: /projects/
+- title: Publications
+  url: /publications/
+- title: CV
+  url: /cv/
+- title: Writing
+  url: /blogs/

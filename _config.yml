@@ -1,22 +1,26 @@
 # Setup
 title:               'Madan Y N'
-tagline:             'At the crossroads of chaos and clarity'
-description:         'Skywalker'
+tagline:             'Modeling complex systems, and measuring how far to trust the models'
+description:         >-
+  Madan Y N is a CPU performance modeling engineer at AMD working on
+  cycle-accurate simulation, numerical modeling and the verification of models
+  of complex systems.
 url:                 https://madanyn3.github.io
 baseurl:             ""
-paginate:            5
 permalink:           pretty
 future:              true
+markdown:            kramdown
 
 # About/contact
 author:
   name:              'Madan Y N'
   url:               https://github.com/madanyn3/
   email:             madanyn3@gmail.com
+  github:            madanyn3
+  linkedin:          madanyn3
 
-# Gems
-plugins:
-  - jekyll-paginate
+# Path to the downloadable CV, linked from the nav, home page and CV page
+cv_pdf:              /assets/cv/Madan_YN_CV.pdf
 
 # Collections
 collections:
@@ -24,6 +28,13 @@ collections:
     output: true
     permalink: /blogs/:title/
 
+exclude:
+  - README.md
+  - LICENSE.md
+  - LOCAL_SETUP_GUIDE.md
+  - Gemfile
+  - Gemfile.lock
+
 # Custom vars
-version:             3.15
+version:             4.0
 google_analytics_id: #UA-XXXX-Y

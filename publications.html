@@ -1,0 +1,50 @@
+---
+layout: page
+title: Publications
+permalink: /publications/
+description: Publications and posters by Madan Y N.
+publication_types:
+  - key: paper
+    heading: Papers
+  - key: preprint
+    heading: Preprints
+  - key: poster
+    heading: Posters
+---
+
+{% for kind in page.publication_types %}
+{% assign entries = site.data.publications | where: "type", kind.key %}
+{% if entries.size > 0 %}
+<section class="pub-group">
+  <h2>{{ kind.heading }}</h2>
+  <ol class="pub-list">
+    {% for pub in entries %}
+    <li class="pub{% if pub.image %} has-thumb{% endif %}">
+      {% if pub.image %}
+      <a class="pub-thumb" href="{{ pub.image_url | default: pub.image | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ pub.image | relative_url }}" alt="Poster: {{ pub.title }}" loading="lazy">
+      </a>
+      {% endif %}
+      <div class="pub-body">
+      <p class="pub-title">{{ pub.title }}</p>
+      <p class="pub-authors">
+        {% for a in pub.authors %}{% if a == site.author.name %}<strong>{{ a }}</strong>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}
+      </p>
+      <p class="pub-venue">{{ pub.venue }}, {{ pub.year }}</p>
+      {% if pub.note and pub.note != "" %}<p><span class="badge">{{ pub.note }}</span></p>{% endif %}
+      {% if pub.abstract %}<p class="pub-abstract">{{ pub.abstract }}</p>{% endif %}
+      {% if pub.links %}
+      <p class="pub-links">
+        {% for l in pub.links %}
+          {% assign first_char = l.url | slice: 0 %}
+          <a href="{% if first_char == '/' %}{{ l.url | relative_url }}{% else %}{{ l.url }}{% endif %}"{% if first_char != '/' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ l.label }}</a>{% unless forloop.last %} · {% endunless %}
+        {% endfor %}
+      </p>
+      {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+{% endfor %}

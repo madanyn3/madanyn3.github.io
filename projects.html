@@ -1,0 +1,68 @@
+---
+layout: page
+title: Projects
+permalink: /projects/
+lead: >-
+  Research and engineering projects, grouped by where I did them. Code for
+  the public ones is on GitHub. Work done at AMD is confidential and appears
+  only in summary on my CV.
+description: Research and engineering projects by Madan Y N, in modeling, simulation and computer architecture.
+---
+
+{% for group in site.data.projects %}
+<section class="project-group">
+  <h2>{{ group.group }}</h2>
+  {% if group.intro %}<p class="group-intro">{{ group.intro }}</p>{% endif %}
+
+  {% for project in group.items %}
+  <article class="project" id="{{ project.id }}">
+    <header class="project-header">
+      <h3 class="project-title"><a href="#{{ project.id }}">{{ project.title }}</a></h3>
+      <span class="project-dates">{{ project.dates }}</span>
+    </header>
+    {% if project.context %}<p class="project-context">{{ project.context }}</p>{% endif %}
+    {% if project.award %}<p><span class="badge">{{ project.award }}</span></p>{% endif %}
+    <p class="project-summary">{{ project.summary }}</p>
+    {% if project.bullets %}
+    <details class="project-details">
+      <summary>Details</summary>
+      <ul class="project-bullets">
+        {% for b in project.bullets %}<li>{{ b }}</li>{% endfor %}
+      </ul>
+    </details>
+    {% endif %}
+    {% if project.tags or project.links %}
+    <footer class="project-footer">
+      {% if project.tags %}
+      <ul class="tags">
+        {% for t in project.tags %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      {% if project.links %}
+      <span class="project-links">
+        {% for l in project.links %}
+          {% assign first_char = l.url | slice: 0 %}
+          <a href="{% if first_char == '/' %}{{ l.url | relative_url }}{% else %}{{ l.url }}{% endif %}"{% if first_char != '/' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ l.label }} →</a>
+        {% endfor %}
+      </span>
+      {% endif %}
+    </footer>
+    {% endif %}
+  </article>
+  {% endfor %}
+</section>
+{% endfor %}
+
+<script>
+  // Open a project's details when it is linked to directly (e.g. /projects/#cardiac-redundancy)
+  (function () {
+    function openTarget() {
+      var id = decodeURIComponent(location.hash.slice(1));
+      var project = id && document.getElementById(id);
+      var details = project && project.querySelector('.project-details');
+      if (details) details.open = true;
+    }
+    openTarget();
+    window.addEventListener('hashchange', openTarget);
+  })();
+</script>

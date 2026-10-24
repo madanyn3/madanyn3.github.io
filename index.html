@@ -1,37 +1,106 @@
 ---
 layout: default
-title: Home
+title: About
 ---
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url | absolute_url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-
-    <!-- <span class="post-date">{{ post.date | date_to_string }}</span> -->
-
-    {{ post.content }}
+<section class="hero">
+  <img class="hero-photo" src="{{ '/assets/images/headshot.jpg' | relative_url }}" alt="Portrait of Madan Y N" width="320" height="320">
+  <div class="hero-text">
+    <h1 class="hero-name">Madan Y N</h1>
+    <p class="hero-role">
+      Silicon Design Engineer II, Server CPU Performance Modeling<br>
+      <a href="https://www.amd.com/" target="_blank" rel="noopener noreferrer">AMD</a>, Bengaluru, India
+    </p>
+    {% include social-links.html %}
   </div>
-  {% endfor %}
-</div>
+</section>
 
-<!-- <div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ paginator.next_page_path | absolute_url }}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ '/' | absolute_url }}">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ paginator.previous_page_path | absolute_url }}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div> -->
+<section class="bio">
+  <p>
+    I build models of computer systems, and I try to work out how far those
+    models can be trusted. At AMD I model new cache-hierarchy features in a
+    cycle-accurate CPU simulator, run bottleneck analysis and design-space
+    exploration before the architecture is finalized, and check the models
+    against RTL.
+  </p>
+  <p>
+    I graduated from <a href="https://www.ee.iitb.ac.in/" target="_blank" rel="noopener noreferrer">IIT Bombay</a>
+    in 2024 with a B.Tech (Honours) in Electrical Engineering and a minor in
+    Computer Science and Engineering. There I built
+    <a href="{{ '/projects/#transformers-fpga' | relative_url }}">analytical latency models for transformer inference on FPGAs</a>
+    at TCS Research, which won the Best Poster Award at the HiPC 2023 Student
+    Research Symposium. For my bachelor's thesis, with Sunil Shenoy (VP
+    Emeritus, Intel) and Prof. Laxmeesha Somappa, I
+    <a href="{{ '/projects/#isa-thesis' | relative_url }}">studied the role of the ISA in CPU performance using gem5</a>.
+  </p>
+  <p>
+    Lately I have been modeling a system nobody designed: a
+    <a href="{{ '/projects/#cardiac-redundancy' | relative_url }}">self-directed study</a>,
+    built on a closed-loop cardiovascular model, of whether a hypothetical
+    auxiliary pump could keep vital organs perfused after the heart stops. It
+    showed me where my judgment runs out: choosing and trusting stiff ODE
+    solvers, deciding which parameters a model can identify, and quantifying
+    uncertainty. That is the mathematics I want to study next.
+  </p>
+</section>
+
+<section class="home-section">
+  <h2>Interests</h2>
+  <ul class="interest-list">
+    <li>Modeling and simulation of complex systems</li>
+    <li>Numerical methods for ODEs and PDEs</li>
+    <li>Verification and uncertainty quantification</li>
+    <li>Computer architecture and performance modeling</li>
+  </ul>
+</section>
+
+<section class="home-section">
+  <h2>News</h2>
+  <ul class="news-list">
+    {% for item in site.data.news limit: 6 %}
+    <li>
+      <span class="news-date">{{ item.date }}</span>
+      <span class="news-text">{{ item.text | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="home-section">
+  <div class="section-heading">
+    <h2>Selected work</h2>
+    <a class="more-link" href="{{ '/projects/' | relative_url }}">All projects →</a>
+  </div>
+  <div class="card-grid">
+    {% assign featured = "cardiac-redundancy,edge-ml-simulator,transformers-fpga" | split: "," %}
+    {% for id in featured %}
+      {% for group in site.data.projects %}
+        {% for project in group.items %}
+          {% if project.id == id %}
+          <a class="card" href="{{ '/projects/' | relative_url }}#{{ project.id }}">
+            <span class="card-meta">{{ project.dates }}</span>
+            <span class="card-title">{{ project.title }}</span>
+            <span class="card-text">{{ project.blurb | default: project.summary }}</span>
+            {% if project.award %}<span class="badge">{{ project.award | split: "," | first }}</span>{% endif %}
+          </a>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Outside work</h2>
+  <p>
+    I read mostly popular science (Nick Lane's <em>The Vital Question</em> and
+    <em>Transformer</em> are recent favourites) and stories that leave a mark,
+    like <em>Dune</em> and <em>Project Hail Mary</em>. I play badminton, work out,
+    and consider myself an expert cricket analyst, courtesy of a cricket-mad
+    household. I recently started cooking for myself; no kitchen disasters so far.
+    I also <a href="{{ '/blogs/' | relative_url }}">write</a>, about technology
+    and science and occasionally about <em>Stranger Things</em>, and most
+    recently built <a href="https://github.com/madanyn3/coastline-rush" target="_blank" rel="noopener noreferrer">Coastline Rush</a>,
+    an offline arcade racing game for Android and the browser.
+  </p>
+</section>

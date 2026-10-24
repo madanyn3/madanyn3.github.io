@@ -1,37 +1,19 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
   {% include head.html %}
 
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    {% include sidebar.html %}
+    {% include header.html %}
 
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
-          </h3>
-        </div>
-      </div>
+    <main id="main" class="container content">
+      {{ content }}
+    </main>
 
-      <div class="container content">
-        {{ content }}
-      </div>
-    </div>
+    {% include footer.html %}
 
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-    <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode">
-      <span class="theme-toggle-icon"></span>
-      <span class="theme-toggle-text">Dark Mode</span>
-    </button>
-
-    <script src="{{ '/assets/js/dark-mode.js' | relative_url }}"></script>
-    <script src='{{ site.baseurl }}/public/js/script.js'></script>
+    <script src="{{ '/assets/js/theme.js' | relative_url }}?v={{ site.version }}"></script>
   </body>
 </html>

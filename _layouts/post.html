@@ -2,28 +2,16 @@
 layout: default
 ---
 
-<div class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
-  <span class="post-date">{{ page.date | date_to_string }}</span>
-  {{ content }}
-</div>
-
-<p><a href="/blogs/">⬅ Back to Blogs</a></p>
-
-{% if site.related_posts.size >= 1 %}
-<div class="related">
-  <h2>Related posts</h2>
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      <li>
-        <h3>
-          <a href="{{ site.baseurl }}{{ post.url }}">
-            {{ post.title }}
-            <small>{{ post.date | date_to_string }}</small>
-          </a>
-        </h3>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
-{% endif %}
+<article class="post">
+  <p class="post-back"><a href="{{ '/blogs/' | relative_url }}">← Writing</a></p>
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% if page.series %} · {{ page.series | replace: "-", " " | capitalize }}, part {{ page.serial_number }}{% endif %}
+    </p>
+  </header>
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>

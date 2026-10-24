@@ -1,0 +1,62 @@
+---
+layout: page
+title: Writing
+permalink: /blogs/
+lead: >-
+  Essays on technology and science, plus shorter pieces on whatever I happen to
+  be thinking about. I'd love to hear your views; my email is in the footer.
+description: Essays and notes by Madan Y N on computer architecture, biology, and more.
+---
+
+<section class="writing-group">
+  <h2>Essays &amp; deep dives</h2>
+  <ul class="writing-list">
+    <li>
+      <a class="writing-title" href="{{ '/blogs/how-much-of-your-life-have-you-spent/' | relative_url }}">How Much of Your Life Have You Spent?</a>
+      <span class="writing-date">Mar 2026</span>
+      <p class="writing-desc">A capability-weighted reframing of midlife: when have you used up half of your biological endowment, rather than half of your years?</p>
+    </li>
+    <li>
+      <a class="writing-title" href="https://medium.com/@myn.create/life-in-disequilibrium-a9524f2e7fee" target="_blank" rel="noopener noreferrer">Life in Disequilibrium ↗</a>
+      <span class="writing-date">Nov 2025</span>
+      <p class="writing-desc">Cellular bioenergetics and metabolism, drawing on Nick Lane's <em>The Vital Question</em> and <em>Transformer</em>.</p>
+    </li>
+    <li>
+      <a class="writing-title" href="https://medium.com/@myn.create/why-apple-silicon-is-better-7d6628aa0c3e" target="_blank" rel="noopener noreferrer">Why Apple Silicon is Better ↗</a>
+      <span class="writing-date">Jan 2025</span>
+      <p class="writing-desc">Apple M1 and Intel Golden Cove compared on cache hierarchy, instruction fetch, decoding and memory ordering.</p>
+    </li>
+  </ul>
+</section>
+
+{% assign quick_reads = site.blogs | where: "category", "quick-read" | sort: "date" | reverse %}
+{% assign series_posts = quick_reads | where_exp: "post", "post.series != nil" | group_by: "series" %}
+{% assign standalone_posts = quick_reads | where_exp: "post", "post.series == nil" %}
+
+<section class="writing-group">
+  <h2>Quick reads</h2>
+
+  {% if standalone_posts.size > 0 %}
+  <ul class="writing-list compact">
+    {% for post in standalone_posts %}
+    <li>
+      <a class="writing-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="writing-date">{{ post.date | date: "%b %Y" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% for series_group in series_posts %}
+  <h3 class="series-title">{{ series_group.name | replace: "-", " " | capitalize }} series</h3>
+  <ul class="writing-list compact">
+    {% assign sorted_items = series_group.items | sort: "serial_number" %}
+    {% for post in sorted_items %}
+    <li>
+      <a class="writing-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <span class="writing-date">{{ post.date | date: "%b %Y" }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</section>

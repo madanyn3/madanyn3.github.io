@@ -1,0 +1,228 @@
+# Rendered on /projects/. Each group becomes a section; `id` is the anchor
+# used for deep links (e.g. /projects/#cardiac-redundancy).
+
+- group: Independent research
+  intro: >-
+    Self-directed projects, done alongside my job, on modeling systems and
+    checking the models.
+  items:
+    - id: cardiac-redundancy
+      title: "Cardiac Redundancy: An Auxiliary-Pump Design Study"
+      context: Self-directed study
+      blurb: >-
+        Can a hypothetical auxiliary heart keep vital organs oxygenated after
+        cardiac arrest? A closed-loop ODE model of circulation and metabolism.
+      dates: Jun 2026 – present
+      summary: >-
+        Could a hypothetical auxiliary heart keep a resting adult's vital
+        organs supplied with oxygen after the native heart stops, and which
+        constraints make that impossible? A computational feasibility study,
+        where an infeasible answer counts as a valid outcome.
+      bullets:
+        - >-
+          Extended the published Smith et al. closed-loop, two-ventricle 0D
+          cardiovascular model in Python, splitting the lumped systemic
+          resistance into per-organ vascular branches and adding oxygen
+          transport, finite lung stores and glucose–glycogen accounting.
+        - >-
+          Stiff ODE integration, nonlinear root finding and event-driven valve
+          dynamics; auxiliary-pump behavior characterized across 1,500 static
+          parameter combinations and 10 dynamic scenarios.
+        - >-
+          Verified through conservation checks, solver comparisons, tolerance
+          refinement and a regression suite of 465 tests (as of Oct 2026).
+        - >-
+          An unexpected result: how long support lasts is limited by the
+          liver's glucose release rate, not the size of its glycogen store.
+        - >-
+          I designed the study and own the formulation, assumptions and review
+          of every result; the implementation was AI-assisted.
+      tags: [Python, SciPy, JAX, stiff ODEs, physiological modeling, verification]
+      links:
+        - label: Code & reports
+          url: https://github.com/madanyn3/Designing-Cardiac-Redundancy
+
+    - id: edge-ml-simulator
+      title: Analytical Edge-ML Performance Simulator
+      context: Self project
+      blurb: >-
+        Predicting ML-kernel cost on microcontrollers from source-derived
+        models of work, caches and memory.
+      dates: Sep 2026 – present
+      summary: >-
+        Estimating the cost of running quantized neural-network kernels on
+        microcontrollers from models derived from the kernel source and the
+        architecture, rather than from fitted per-operator regressions.
+      bullets:
+        - >-
+          C++20 model of a pinned CMSIS-NN int8 fully connected kernel,
+          including its exact quantization semantics, deriving operation
+          counts and ordered memory accesses.
+        - >-
+          Configurable set-associative LRU cache hierarchies, pipelined
+          memory-service models, analytical acceleration for regular access
+          patterns and conditional roofline bounds, each checked against an
+          independent reference model.
+        - >-
+          First physical target is an STM32 NUCLEO-L4R5ZI board; validated
+          hardware timing predictions are the next milestone.
+      tags: [C++20, CMake, cache modeling, CMSIS-NN]
+      links:
+        - label: Code
+          url: https://github.com/madanyn3/Analytical-Edge-ML-Simulator
+
+    - id: tile-aware-kernels
+      title: Tile-Aware Attention Kernels
+      context: Self project
+      dates: 2025 – 2026
+      summary: >-
+        Building transformer attention from scratch in OpenCL, from tiled
+        matrix multiplication up to streaming softmax.
+      bullets:
+        - >-
+          OpenCL kernels for 16×16 tiled GEMM and row-tiled streaming softmax,
+          exploring local-memory reuse and parallel reductions.
+        - >-
+          Benchmark harness covering 48 attention problem shapes, recording
+          kernel time, host-observed pipeline time and numerical error against
+          PyTorch references.
+        - >-
+          Prototyped C++ AVX-512 FP32 matrix-multiplication microkernels using
+          vector broadcasts and fused multiply-add intrinsics.
+      tags: [OpenCL, C++, AVX-512, PyTorch]
+      links:
+        - label: Code
+          url: https://github.com/madanyn3/Tile-Aware-LLM-Kernel-Optimization
+
+- group: IIT Bombay and TCS Research
+  items:
+    - id: transformers-fpga
+      title: Modeling Performance of Transformers on FPGA
+      context: TCS Research, with Ashwin Krishnan and Manoj Nambiar
+      blurb: >-
+        Analytical latency models and genetic-algorithm design search for
+        GPT-2 inference on FPGAs.
+      dates: Jul 2023
+      award: Best Poster Award, IEEE HiPC 2023 Student Research Symposium
+      summary: >-
+        Analytical performance models standing in for FPGA hardware too
+        expensive to build for every design point.
+      bullets:
+        - >-
+          Developed two low-latency pipelined architectures for GPT-2 inference
+          and derived latency expressions for each.
+        - >-
+          Design-space exploration with a genetic algorithm to find efficient
+          partitionings of FPGA resources.
+        - >-
+          Within Xilinx Alveo U280 resource limits, the models estimate 21× and
+          119× speedups over a dual-core Intel i5 CPU baseline.
+      tags: [performance modeling, FPGA, genetic algorithms, transformers]
+      links:
+        - label: Paper (PDF)
+          url: /assets/papers/hipc2023-transformers-fpga.pdf
+        - label: Poster (PDF)
+          url: /assets/papers/hipc2023-transformers-fpga-poster.pdf
+        - label: Publication
+          url: /publications/
+
+    - id: isa-thesis
+      title: Analysis of Contemporary ISA Architectures
+      context: >-
+        Bachelor's thesis, IIT Bombay. Advised by Sunil Shenoy (VP Emeritus,
+        Intel) and Prof. Laxmeesha Somappa
+      dates: Jun 2024
+      summary: >-
+        Isolating the role of the instruction set in modern CPU performance by
+        running the same core microarchitecture under ARM and x86 in gem5.
+      bullets:
+        - >-
+          Modeled the Intel Golden Cove P-core in gem5 from reverse-engineering
+          documents and ran SPEC CPU 2017 workloads under both ISAs.
+        - >-
+          ARM performed significantly better than x86. Explaining that result
+          meant finding where gem5 could not represent real x86 hardware
+          features, and which approximations were defensible.
+      tags: [gem5, computer architecture, SPEC CPU 2017]
+      links:
+        - label: Code
+          url: https://github.com/madanyn3/ISA-Analysis-gem5-BTech-Thesis
+
+    - id: clock-gating
+      title: Clock-Gating in Low-Power Microcontrollers
+      context: R&D project, IIT Bombay. Advised by Prof. Madhav Desai
+      dates: May 2024
+      summary: >-
+        Measuring the power saved by clock-gating a multi-cycle, non-pipelined
+        RISC-V microcontroller.
+      bullets:
+        - >-
+          Emulated an RV32I microarchitecture in Python, generated VHDL with the
+          AHIR LLVM-to-HDL toolchain, verified functional correctness, then
+          enabled clock-gating and synthesized the design.
+      tags: [RISC-V, high-level synthesis, VHDL, low power]
+
+    - id: battery-degradation
+      title: Battery Degradation Modeling with Gaussian Processes
+      context: ExoFly IIT Bombay (student team building a manned VTOL aircraft)
+      dates: 2023
+      summary: >-
+        Can a lithium-ion cell's remaining capacity be predicted from
+        electrochemical impedance spectroscopy (EIS) measurements? A
+        reproduction of Zhang et al. (Nature Communications, 2020), done as
+        part of my work with ExoFly.
+      bullets:
+        - >-
+          Paired the published EIS spectra (real and imaginary impedance at 60
+          frequencies) with measured capacity for each charge cycle, and
+          trained a Gaussian process regression model (RBF kernel) mapping the
+          120-value spectrum to capacity.
+        - >-
+          Accuracy varied widely from cell to cell: the model tracked some
+          cells' degradation closely and others poorly.
+      tags: [Python, scikit-learn, Gaussian processes, batteries]
+      links:
+        - label: Code
+          url: https://github.com/madanyn3/Battery-Degradation-Modelling
+        - label: Original paper
+          url: https://doi.org/10.1038/s41467-020-15235-7
+
+- group: Course projects
+  items:
+    - id: risc-superscalar
+      title: 16-bit Superscalar RISC Processor
+      context: Prof. Virendra Singh, CADSL, IIT Bombay
+      dates: Dec 2022
+      summary: >-
+        A two-wide superscalar processor with a 2-bit bimodal branch predictor,
+        a 64-entry reservation station, a 64-entry rename register file, four
+        execution pipelines and a 127-entry reorder buffer. Built in a team of
+        four in Quartus and verified behaviorally in ModelSim.
+      tags: [VHDL, microarchitecture]
+      links:
+        - label: Code
+          url: https://github.com/madanyn3/RISC-Superscalar-Processor
+
+    - id: adders
+      title: Brent–Kung Adder and Dadda Multiplier-Accumulator
+      context: Prof. Dinesh Sharma, IIT Bombay
+      dates: Nov 2023
+      summary: >-
+        A 32-bit Brent–Kung adder and a 16×16 Dadda MAC in VHDL, verified with
+        GHDL on random test vectors.
+      tags: [VHDL, digital arithmetic]
+      links:
+        - label: Code & report
+          url: https://github.com/madanyn3/32-bit-Brent-Kung-Adder
+
+    - id: eeg
+      title: 24-Channel EEG Acquisition Prototype
+      context: Profs. Siddharth Tallur and Laxmeesha Somappa, IIT Bombay
+      dates: May 2023
+      summary: >-
+        An OpenBCI Cyton-based four-layer PCB with six ADS1194 ADCs and a
+        PIC32MX controller; I tested the ADC subsystem.
+      tags: [PCB design, embedded systems]
+      links:
+        - label: Code, PCB & report
+          url: https://github.com/madanyn3/EEG-System

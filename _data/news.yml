@@ -1,0 +1,27 @@
+# Shown newest first on the home page. Add new items at the top.
+- date: Oct 2026
+  text: >-
+    Closed the eighth milestone of the cardiac redundancy study: auxiliary-pump
+    designs exist that pass its pressure and oxygen screens, and support time
+    is limited by the liver's glucose export rate. [Project notes](/projects/#cardiac-redundancy)
+- date: Sep 2026
+  text: >-
+    Started the [Analytical Edge-ML Performance Simulator](/projects/#edge-ml-simulator),
+    a C++20 model of ML-kernel cost on microcontrollers.
+- date: Jun 2026
+  text: >-
+    Began a self-directed computational study of auxiliary circulation after
+    cardiac arrest.
+- date: Mar 2026
+  text: >-
+    New essay: [How much of your life have you spent?](/blogs/how-much-of-your-life-have-you-spent/)
+- date: Jul 2024
+  text: >-
+    Joined the Server CPU Performance Modeling group at AMD, Bengaluru.
+- date: May 2024
+  text: >-
+    Graduated from IIT Bombay with a B.Tech (Honours) in Electrical Engineering.
+- date: Dec 2023
+  text: >-
+    Won the Best Poster Award at the IEEE HiPC 2023 Student Research Symposium.
+    [Poster](/publications/)
